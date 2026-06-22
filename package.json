@@ -8,6 +8,14 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^4.15.0"
+    "astro": "^4.15.0",
+    "@eslint/js": "^10.0.1",
+    "@typescript-eslint/parser": "^8.60.0",
+    "astro-eslint-parser": "^1.4.0",
+    "eslint": "^10.4.0",
+    "eslint-plugin-astro": "^1.7.0",
+    "prettier": "3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript-eslint": "^8.60.0"
   }
 }

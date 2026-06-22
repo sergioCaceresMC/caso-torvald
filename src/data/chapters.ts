@@ -60,7 +60,7 @@ export const chapters: Chapter[] = [
     commands: ["less", "grep", "head -N", "tail -N", "cat"],
     story:
       "Tras accionar la palanca, la mansión se abre. La biblioteca es el corazón de la casa. Sobre el escritorio hay un <strong>diario inmenso</strong> (<code>diario_lord.txt</code>): demasiado largo para leerlo de un tirón con <code>cat</code>.<br><br>Otros papeles de la sala te susurran <em>dónde</em> mirar: una fecha concreta. Ese día, el Lord nombró su mayor temor en una sola palabra, escrita en minúsculas. Esa palabra es la contraseña. (Aquí también descubrirás un <strong>muro de libros</strong> que oculta el estudio, pero solo se abre con un libro que hallarás más tarde.)",
-    hint: 'No lo leas entero: usa <code>less diario_lord.txt</code> y busca con <code>/</code>, o ve directo con <code>grep "20 de mayo" diario_lord.txt</code>. La palabra está en minúsculas.',
+    hint: 'No lo leas entero: usa <code>less diario_lord.txt</code> y busca con <code>/</code>, o ve directo con <code>grep "texto filtrado" archivo.txt</code>. La palabra está en minúsculas.',
   },
   {
     chapter: 3,
@@ -74,8 +74,8 @@ export const chapters: Chapter[] = [
     evidence: "Prueba C — La taza de té de la víctima",
     commands: ["cp", "cp -r", "mv", "ls", "cat"],
     story:
-      "En la cocina, alguien revolvió notas auténticas y falsas en una carpeta. Varias repiten lo mismo —que la contraseña está en la etiqueta de un frasco—, pero solo una dice <em>en cuál</em>.<br><br>Un documento explica el método de la cocinera: haz primero una <strong>copia de seguridad</strong> (<code>cp -r</code>), <strong>mueve</strong> las notas y la <em>olla reveladora</em> (<code>olla.sh</code>) hasta la entrada y hiérvela allí. El vapor borra lo falso y deja dos notas reales: el frasco correcto (con <code>ARSENIC_KITCHEN</code>) y la habitación siguiente.",
-    hint: "Respalda antes de arriesgar: <code>cp -r notas_revueltas notas_respaldo</code>. Luego <code>mv</code> la carpeta y <code>olla.sh</code> a <code>../entrada/</code> y ejecútala allí con <code>bash olla.sh</code>.",
+      "En la cocina, alguien revolvió notas auténticas y falsas en una carpeta. Varias repiten lo mismo, que la contraseña está en la etiqueta de un frasco, pero solo una dice <em>en cuál</em>.<br><br>Busca el método de revelado para descubrir qué documentos son verdaderos. Recuerda: <strong>El vapor borra lo falso y deja las notas reales.</strong>",
+    hint: "Recuerda respaldar antes de arriesgar: <code>cp -r notas_revueltas notas_respaldo</code>. Luego <code>mv</code> la carpeta y <code>archivo_a_mover</code> a <code>../nueva_ruta/</code> y ejecútala allí con <code>bash olla.sh</code>.",
   },
   {
     chapter: 4,
@@ -89,8 +89,8 @@ export const chapters: Chapter[] = [
     evidence: "Prueba D — Instrumental del laboratorio",
     commands: ["nano", "ls -la", "chmod +x", "./script.sh"],
     story:
-      "El laboratorio está en el salón principal. Aquí hay una <strong>máquina reveladora de huellas</strong> (<code>maquina_huellas.sh</code>), pero está apagada y necesita una placa preparada.<br><br>Edita <code>placa.txt</code> con <code>nano</code> y deja su estado exactamente como <code>ESTADO: LISTA</code>. Después dale permiso de ejecución con <code>chmod +x</code> y lánzala con <code>./</code>. Generará un informe con los nombres y la contraseña <code>DIGITALINA</code>, que además es <strong>el libro</strong> que abre el muro de la biblioteca.",
-    hint: "Edita con <code>nano placa.txt</code> (guarda con Ctrl+O, sal con Ctrl+X). Luego <code>chmod +x maquina_huellas.sh</code> y ejecútala con <code>./maquina_huellas.sh</code>.",
+      "El laboratorio está en el salón principal. Aquí hay una <strong>máquina reveladora de huellas</strong> (<code>maquina_huellas.sh</code>), pero está apagada y necesita una placa preparada.<br><br>En la habitación encontrarás las instrucciones para usarla. La máquina generará un informe con los nombres y la contraseña que además es nombre del <strong>libro</strong> que abre el muro de la biblioteca.",
+    hint: "Edita con <code>nano placa.txt</code> (guarda con Ctrl+O, sal con Ctrl+X). Luego cambia los permisos para poder ejecutar la máquina con <code>./maquina_huellas.sh</code>.",
   },
   {
     chapter: 5,
@@ -104,8 +104,8 @@ export const chapters: Chapter[] = [
     evidence: "Prueba E — El escritorio y sus documentos",
     commands: ["bash script.sh", "cat | grep", "grep", "cmd | grep | head"],
     story:
-      "Con el libro <code>DIGITALINA</code>, el <strong>muro de la biblioteca</strong> gira y aparece el estudio: <code>bash muro_libros.sh DIGITALINA</code>. Dentro está el cuerpo del Lord y un <strong>expediente</strong> enorme con decenas de claves candidatas… casi todas señuelos marcados como BORRADOR.<br><br>Solo una clave es real: la que validó el <strong>notario</strong>. Lee la nota del notario y <em>filtra</em> el expediente con una tubería para quedarte únicamente con esa línea.",
-    hint: 'Filtra con una tubería: <code>cat expediente_herencia.txt | grep "NOTARIO"</code>. Ignora todo lo que diga BORRADOR.',
+      "Con el libro <code>DIGITALINA</code>, el <strong>muro de la biblioteca</strong> gira y aparece el estudio: <code>bash muro_libros.sh DIGITALINA</code>. Dentro está el cuerpo del Lord y un <strong>expediente</strong> enorme con decenas de claves candidatas...<br><br>Solo una clave es real: la que validó el <strong>notario</strong>. Lee la nota del notario y <em>filtra</em> el expediente con una tubería para quedarte únicamente con esa línea.",
+    hint: 'Puedes filtrar el contenido de un archivo con una tubería: <code>cat archivo.txt | grep "PALABRA_CLAVE"</code>.',
   },
   {
     chapter: 6,
@@ -119,8 +119,8 @@ export const chapters: Chapter[] = [
     evidence: "Prueba F — El salón principal a media luz",
     commands: ["cp", "cat", "cmd | cmd | cmd", "chmod +x", "./script.sh"],
     story:
-      "En el salón principal está el <strong>agente de policía</strong> con todos los sospechosos. Solo deducirá al culpable si le entregas <strong>las cinco pruebas</strong>: el sobre de la entrada, el diario, el frasco correcto, las huellas del laboratorio y la confesión del estudio.<br><br>Reúnelas aquí con <code>cp</code>, <strong>únelas con una tubería</strong> hacia el agente en su orden de deducción —<code>5-1-2-3-4</code>— y dale permiso para revisarlas con <code>chmod +x</code>. Anunciará a la culpable, <strong>Lady Isolde Torvald</strong>, y te dará la contraseña final.",
-    hint: 'Une las pruebas en orden y pásalas por una tubería: <code>cat confesion_manuscrita.txt .sobre_sellado.txt diario_lord.txt frasco_arsenico.txt huellas_reveladas.txt | ./inspector.sh</code>. Antes, dale permiso con <code>chmod +x inspector.sh</code>.',
+      "En el salón principal está el <strong>agente de policía</strong> con todos los sospechosos. Solo deducirá al culpable si le entregas <strong>las cinco pruebas</strong>: el sobre de la entrada, el diario, el frasco correcto, las huellas del laboratorio y la confesión del estudio.<br><br>Reúnelas aquí con <code>cp</code>, <strong>únelas con una tubería</strong> hacia el agente en su orden de deducción y dale permiso para revisarlas con <code>chmod +x</code>. Anunciará al culpable y te dará la contraseña final.",
+    hint: 'Une las pruebas en orden y pásalas por una tubería: <code>cat archivo_1.txt archivo_2.txt ... archivo_N.txt huellas_reveladas.txt | ./inspector.sh</code>. Recuerda darle permisos con <code>chmod +x inspector.sh</code>.',
   },
 ];
 

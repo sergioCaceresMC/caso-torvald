@@ -4,11 +4,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 // Import the setup script as a static URL so it can be downloaded directly.
 import setupScript from '../assets/setup.sh?url';
-import brand from '../assets/brand.jpg';
+import brand from '../assets/brand.webp';
 import { chapters } from '../data/chapters';
 
 const base = import.meta.env.BASE_URL;
-const casoHref = `${base}caso`;
+const casoHref = `${base}/caso`;
 
 const steps = [
   {
