@@ -19,12 +19,34 @@ The site is in **Spanish**. All UI copy and story text should stay in Spanish.
 ## The game has two halves — keep them in sync
 
 The web app is only one half. The other half is **`src/assets/setup.sh`**, the
-bash script the player runs in their own Linux terminal. It builds the `mansion/`
-directory tree (one folder per chapter: `entrada`, `biblioteca`, `cocina`,
-`laboratorio`, `estudio`, `salon_principal`) full of evidence files, hidden files
-(`.sobre_sellado.txt`, etc.), and permission puzzles. **Each chapter's password
-is embedded in those generated files** — the player finds it with the commands
-that chapter teaches, then types it into the web app.
+bash script the player runs in their own Linux terminal. **Each chapter's password
+is embedded in the generated files** — the player finds it with the commands that
+chapter teaches, then types it into the web app.
+
+The terminal half is itself an interactive program, not just static files.
+`setup.sh` builds **only `mansion/entrada/`** (welcome, detective notebook,
+hidden `.sobre_sellado.txt` with password 1, and the lever). The rest of the
+mansion is generated on demand by nested helper scripts that each gate progress:
+
+- `entrada/palanca.sh <pass>` — the lever; needs `DETECTIVE_KERNEL`, then builds
+  `biblioteca/`, `cocina/`, and `salon_principal/laboratorio/`.
+- `biblioteca/muro_libros.sh <libro>` — book-wall; needs `DIGITALINA`, then
+  reveals the hidden `biblioteca/estudio/`.
+- `cocina/olla.sh` — must be `mv`'d to `entrada/` and run there; deletes the fake
+  notes from `notas_revueltas/`, leaving the two real ones.
+- `laboratorio/maquina_huellas.sh` — needs `placa.txt` edited to `ESTADO: LISTA`
+  (nano) and `chmod +x`; emits `huellas_reveladas.txt` (names + `DIGITALINA`).
+- `salon_principal/inspector.sh` — reads the 5 clue files piped in order
+  **5-1-2-3-4** (matched via `### EVIDENCIA E1..E5` tags); needs `chmod +x`;
+  reveals `ISOLDE_CULPABLE` + the final code.
+
+The map (parentheses = generated later):  `entrada → {biblioteca → (estudio),
+cocina, salon_principal → laboratorio}`. Map order ≠ chapter order: chapters run
+entrada(1) · biblioteca(2) · cocina(3) · laboratorio(4) · estudio(5) · salon(6).
+Clue/evidence files use in-world names (`diario_lord.txt`, `frasco_arsenico.txt`,
+`confesion_manuscrita.txt`…), never literal `pista`/`falsa`; per-room guidance
+lives in `cuaderno_detective.txt`. Long decoy docs (diary, expediente) are
+generated with bash loops to exceed 100 lines so `cat` is impractical.
 
 > **Critical invariant:** the passwords in `PASSWORDS` (`src/data/chapters.ts`)
 > MUST exactly match the ones written into the files by `setup.sh`

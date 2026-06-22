@@ -19,12 +19,12 @@ const steps = [
   {
     n: 'II',
     title: 'Prepara la mansión',
-    body: 'Ábrelo en tu terminal de Linux y ejecútalo con <br> <code>bash setup.sh</code>. Construirá la carpeta <code>mansion/</code> con las seis habitaciones del caso.',
+    body: 'Ábrelo en tu terminal de Linux y ejecútalo con <br> <code>bash setup.sh</code>. Preparará la <strong>entrada</strong> de la mansión; el resto lo irás abriendo tú desde dentro.',
   },
   {
     n: 'III',
     title: 'Investiga con comandos reales',
-    body: 'Recorre las habitaciones usando comandos de Linux: <code>ls</code>, <code>cat</code>, <code>grep</code> y más. En cada una, el archivo <code>pista.txt</code> te dice qué hacer.',
+    body: 'Recorre las habitaciones usando comandos de Linux: <code>ls</code>, <code>cat</code>, <code>grep</code> y más. En cada una, el archivo <code>cuaderno_detective.txt</code> te dice qué hacer.',
   },
   {
     n: 'IV',
@@ -111,8 +111,8 @@ const steps = [
           <h3 class="reqs-title">Requisitos</h3>
           <ul class="reqs-list">
             <li>Una terminal con <code>bash</code> (Linux, macOS o Windows + WSL).</li>
-            <li>Nada más: el guion no instala paquetes ni modifica tu sistema.</li>
             <li>El navegador, abierto en esta web, para introducir las contraseñas.</li>
+            <li>Nada más: el guion no instala paquetes ni modifica tu sistema.</li>
           </ul>
 
           <a class="btn btn-secondary install-dl" href={setupScript} download="setup.sh">
@@ -152,11 +152,37 @@ const steps = [
 
   <footer class="home-foot">
     <p>El Caso Torvald · Escape room para aprender la terminal de Linux.</p>
+    
+    <a href="http://proyecto-mitha.org/" class="hov mitha-link">
+      Un proyecto en colaboración con <span class="mitha">MïTHA</span>
+    </a>
+    <br>
+    <a href="https://sergiocaceresmc.github.io/portfolio/" class="hov"><p>Creado por Sergio M. Cáceres.</p></a>
   </footer>
 </BaseLayout>
 
 <style>
   /* ── Shared page width ── */
+  .mitha {
+    margin-left: 0.2rem;
+    font-family: var(--font-mitha);
+  }
+
+  .mitha-link {
+    color: #7e7054;
+    margin: 5px 0;
+  }
+
+  .hov {
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    transform-origin: center;
+  }
+  .hov:hover {
+    transform: scale(1.1);
+  }
+
   .home {
     width: 100%;
     max-width: 1040px;

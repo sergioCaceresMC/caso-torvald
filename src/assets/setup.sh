@@ -15,35 +15,26 @@ NC='\033[0m'
 clear
 echo ""
 echo -e "${GOLD}╔══════════════════════════════════════════════════════════╗${NC}"
-echo -e "${GOLD}║          EL CASO TORVALD — ESCAPE ROOM LINUX             ║${NC}"
-echo -e "${GOLD}║              Preparando la mansión...                    ║${NC}"
+echo -e "${GOLD}║            EL CASO TORVALD — ESCAPE ROOM LINUX           ║${NC}"
+echo -e "${GOLD}║                Preparando la entrada...                  ║${NC}"
 echo -e "${GOLD}╚══════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
 # ============================================================
-# CREAR ESTRUCTURA DE DIRECTORIOS
+# SOLO SE CONSTRUYE LA ENTRADA.
+# El resto de la mansión está cerrado: se abre con la palanca.
 # ============================================================
 mkdir -p mansion/entrada
-mkdir -p mansion/biblioteca
-mkdir -p mansion/cocina/pistas_falsas
-mkdir -p mansion/laboratorio
-mkdir -p mansion/estudio/documentos/.archivos_privados
-mkdir -p mansion/estudio/documentos/cartas
-mkdir -p mansion/salon_principal/sospechosos
 
-echo -e "${GRAY}  Construyendo la mansión...${NC}"
+echo -e "${GRAY}  Abriendo el portón de la mansión...${NC}"
 
-# ============================================================
-# CAPÍTULO 1 — LA ENTRADA
-# Comandos: pwd, whoami, ls, ls -la, cat, cd
-# ============================================================
-
-cat > mansion/entrada/bienvenida.txt << 'HEREDOC'
+# ── Bienvenida ──────────────────────────────────────────────
+cat > mansion/entrada/bienvenida.txt << 'DOC'
 ╔══════════════════════════════════════════════════════════╗
 ║              MANSIÓN TORVALD — BIENVENIDO                ║
 ╚══════════════════════════════════════════════════════════╝
 
-Son las 11:47 de la noche del 13 de octubre.
+Son las 23:47 de la noche del 13 de octubre.
 
 Lord Edmund Torvald, millonario y excéntrico coleccionista,
 ha sido hallado muerto en su estudio. La policía local está
@@ -51,103 +42,66 @@ desconcertada. Solo tú puedes resolver este caso.
 
 Eres el Detective Marcos Kernel.
 
-Antes de adentrarte en la mansión, oriéntate.
-¿Sabes dónde estás? ¿Sabes quién eres en este sistema?
+Estás en el portón de la mansión. Las puertas interiores
+siguen cerradas. Antes de entrar, oriéntate:
+¿dónde estás? ¿quién eres en este sistema?
 
-Hay respuestas a esas preguntas. Búscalas.
+Hay cosas que no se ven a primera vista.
+Cuando estés listo, lee: cuaderno_detective.txt
+DOC
 
-Cuando estés listo, lee el archivo: instrucciones.txt
-HEREDOC
-
-cat > mansion/entrada/instrucciones.txt << 'HEREDOC'
-╔══════════════════════════════════════════════════════════╗
-║                  INSTRUCCIONES DEL CASO                  ║
-╚══════════════════════════════════════════════════════════╝
-
-La mansión Torvald tiene 6 habitaciones que investigar.
-Cada habitación es una carpeta del sistema.
-
-En cada habitación encontrarás:
-  pista.txt     → Explica qué comandos usar y cómo usarlos
-  Otros archivos → Evidencias, pistas y secretos del caso
-
-TU OBJETIVO:
-  Encontrar la CONTRASEÑA de cada habitación e
-  introducirla en la web del caso para avanzar.
-
-HABITACIONES:
-  mansion/entrada/          ← estás aquí ahora
-  mansion/biblioteca/
-  mansion/cocina/
-  mansion/laboratorio/
-  mansion/estudio/
-  mansion/salon_principal/
-
-Para moverte entre habitaciones:
-  cd nombre_carpeta/    → entra en una carpeta
-  cd ..                 → vuelve a la carpeta anterior
-  cd ../biblioteca      → ve directamente a biblioteca
-
-Lee el archivo pista.txt para saber qué hacer aquí.
-HEREDOC
-
-cat > mansion/entrada/pista.txt << 'HEREDOC'
-╔══════════════════════════════════════════════════════════╗
-║           PISTA — CAPÍTULO 1: La Entrada                 ║
-╚══════════════════════════════════════════════════════════╝
+# ── Cuaderno del detective (guía del capítulo 1) ────────────
+cat > mansion/entrada/cuaderno_detective.txt << 'DOC'
+══════════════════════════════════════════════════════════
+ CUADERNO DEL DETECTIVE — La Entrada
+ Objetivo: orientarte y abrir la mansión
+══════════════════════════════════════════════════════════
 
 COMANDOS DE ESTE CAPÍTULO:
 
-  pwd
-    Muestra la ruta completa de tu carpeta actual.
-    Ejemplo: /home/usuario/mansion/entrada
+  pwd                  Muestra en qué carpeta estás.
+  whoami               Muestra tu usuario en el sistema.
+  ls                   Lista los archivos visibles.
+  ls -la               Lista TODO, también lo oculto.
+                       (en Linux, lo oculto empieza por un punto .)
+  cat archivo.txt      Lee el contenido de un archivo.
+  cd carpeta/          Entra en una carpeta.  cd ..  retrocede.
 
-  whoami
-    Muestra tu nombre de usuario en el sistema.
-
-  ls
-    Lista los archivos visibles de la carpeta actual.
-
-  ls -la
-    Lista TODOS los archivos, incluyendo los ocultos.
-    Los archivos ocultos en Linux empiezan con un punto (.)
-    y no aparecen con 'ls' normal. Necesitas 'ls -la'.
-
-  cat nombre_archivo.txt
-    Muestra el contenido de un archivo en la pantalla.
-
-  cd nombre_carpeta/
-    Entra en una carpeta.
-
-  cd ..
-    Vuelve a la carpeta anterior.
-
-────────────────────────────────────────────────────────────
+──────────────────────────────────────────────────────────
 INVESTIGACIÓN:
 
-El mayordomo dejó algo antes de marcharse.
-Dijo que hay más de lo que parece en esta entrada.
+El mayordomo dejó algo antes de marcharse, pero no a la vista.
+En Linux, no todo lo que existe se muestra por defecto.
+Busca lo que permanece oculto y léelo con calma.
 
-En Linux no todo lo que existe se muestra por defecto.
-¿Sabes cómo ver lo que permanece oculto?
-¿Sabes quién eres en este sistema? ¿Dónde estás?
+Dentro encontrarás la PRIMERA CONTRASEÑA del caso.
 
-La contraseña aguarda donde los ojos no miran.
-────────────────────────────────────────────────────────────
-Para avanzar al siguiente capítulo: cd ../biblioteca
-HEREDOC
+──────────────────────────────────────────────────────────
+LA PALANCA:
 
-cat > mansion/entrada/.sobre_sellado.txt << 'HEREDOC'
+Las puertas de la mansión están selladas. Junto a ti hay
+una palanca: el archivo  palanca.sh
+
+Esa palanca solo cede ante quien conoce la primera
+contraseña. Acciónala así (desde la carpeta entrada):
+
+    bash palanca.sh LA_CONTRASEÑA
+
+Si aciertas, la mansión entera se abrirá ante ti.
+══════════════════════════════════════════════════════════
+DOC
+
+# ── Sobre sellado (OCULTO) — contiene la contraseña 1 ───────
+cat > mansion/entrada/.sobre_sellado.txt << 'DOC'
 ╔══════════════════════════════════════════════════════════╗
 ║              SOBRE SELLADO — CONFIDENCIAL                ║
 ╚══════════════════════════════════════════════════════════╝
 
 Detective Kernel:
 
-Le entrego este sobre con discreción.
-Llevo 30 años sirviendo en esta mansión y sé que algo
-oscuro ha ocurrido aquí. El Lord sospechaba de alguien
-muy cercano, pero no quiso decirme nada más.
+Le entrego este sobre con discreción. Llevo 30 años
+sirviendo en esta mansión y sé que algo oscuro ha ocurrido.
+El Lord sospechaba de alguien muy cercano.
 
 La noche del 12 de octubre vi una figura entrar al
 laboratorio a las 23:00. No era el Lord.
@@ -156,1193 +110,760 @@ Confíe en los documentos. Ellos no mienten.
 
                            — Thomas Bash, Mayordomo
 
-╔══════════════════════════════════════════════════════════╗
-║         CONTRASEÑA DEL CAPÍTULO 1: DETECTIVE_KERNEL      ║
-║   Introdúcela en la web para desbloquear la Biblioteca   ║
-╚══════════════════════════════════════════════════════════╝
-HEREDOC
+La palanca de la entrada obedece a este nombre en clave.
+Esta es, además, la primera contraseña que debe introducir
+en la web del caso:
 
-# ============================================================
-# CAPÍTULO 2 — LA BIBLIOTECA
-# Comandos: cat, less, head, tail, grep
-# ============================================================
+        DETECTIVE_KERNEL
 
-cat > mansion/biblioteca/notas_investigacion.txt << 'HEREDOC'
-NOTAS DE INVESTIGACIÓN — Habitación: Biblioteca
-================================================
-Hora de entrada: 00:13
-Estado: Estantes llenos de libros. Escritorio con papeles.
-Observación inicial: Hay un diario personal sobre el escritorio.
+DOC
 
-El diario es extenso. Puede contener información clave
-enterrada en algún lugar del texto.
-
-Hay también varias cartas y una lista de sospechosos.
-HEREDOC
-
-cat > mansion/biblioteca/diario_lord.txt << 'HEREDOC'
-DIARIO PERSONAL DE LORD EDMUND TORVALD
-═════════════════════════════════════════
-
-1 de enero de 2024
-Año nuevo. Isolde y yo apenas nos hablamos ya.
-Paso la mayoría del tiempo en esta biblioteca.
-Los libros son más honestos que las personas.
-
-5 de enero de 2024
-Victor vino a visitarme. Mi sobrino siempre necesita dinero.
-Le di £500 esta vez. Me preocupa su situación económica.
-
-12 de enero de 2024
-El jardín luce espléndido. Isolde ganó otro premio de
-horticultura del condado. Conoce cada planta de esta finca.
-Cada flor, cada hoja, cada raíz.
-
-20 de enero de 2024
-Reunión con James Grub, mi abogado. Debería revisar
-el testamento. Hay cosas que han cambiado.
-
-3 de febrero de 2024
-Dolor de cabeza persistente esta semana. Thomas me trae el
-té de las 22:30 como siempre. Es el único ritual que me
-queda de cuando Isolde y yo éramos felices.
-
-14 de febrero de 2024
-San Valentín. Isolde me regaló flores del jardín.
-Dedaleras. "Tus favoritas", dijo. Nunca me han gustado
-las dedaleras. ¿Por qué diría eso?
-
-1 de marzo de 2024
-He empezado a sospechar. Los números de mis cuentas
-no cuadran. Alguien ha revisado mis documentos privados.
-El armario del estudio estaba abierto y yo siempre lo cierro.
-
-15 de marzo de 2024
-Victor vino de nuevo. Pidió otro préstamo. Se lo negué.
-Se marchó furioso. Entiendo su frustración, pero tiene límites.
-
-22 de marzo de 2024
-La póliza de seguro de vida vence pronto. Debo renovarla.
-Isolde es la beneficiaria. Quizás debería revisarlo.
-
-1 de abril de 2024
-Descubrí algo perturbador en el laboratorio esta mañana.
-Alguien ha estado usando mis instrumentos de química.
-Hay rastros de un experimento reciente que yo no hice.
-
-10 de abril de 2024
-Thomas me advirtió con la mirada esta mañana.
-No dijo nada en voz alta, pero entendí su mensaje.
-Debo tener cuidado. Mucho cuidado.
-
-18 de abril de 2024
-He tomado una decisión: cambiaré el testamento la semana
-que viene. Victor recibirá la mansión. Isolde tiene el
-apartamento de Londres y es suficiente para ella.
-
-25 de abril de 2024
-No he podido hablar con el abogado. Siempre hay algo
-que lo impide. Una cena, una visita, un compromiso social
-que Isolde organiza sin consultarme.
-
-2 de mayo de 2024
-El dolor de estómago ha empeorado. El médico dice que es
-estrés. Quizás tiene razón. Quizás no.
-
-10 de mayo de 2024
-Encontré una nota sin firma en mi escritorio:
-"Hay personas que preferirían que no cambiaras ese testamento."
-La quemé. No quiero pensar en sus implicaciones.
-
-20 de mayo de 2024
-He tomado nota de todo. Si algo me ocurre, quiero que
-quede constancia de lo que realmente está pasando aquí.
-La situación que vivo en esta casa no tiene otro nombre:
-
-Es TRAICION.
-
-No puedo escribir más por ahora. Tengo miedo.
-
-5 de junio de 2024
-He escondido las pruebas importantes en el estudio.
-En un lugar que solo un buen detective podrá encontrar.
-Si lees esto, Detective, busca bien. No te rindas.
-
-8 de junio de 2024
-Isolde preparó ella misma el té esta noche.
-Thomas estaba fuera. El sabor era diferente.
-Probablemente sea mi imaginación.
-Probablemente.
-
-10 de junio de 2024
-Esta será mi última entrada. Lo presiento con claridad.
-Espero que la justicia haga su trabajo.
-
-                              — Edmund Charles Torvald
-HEREDOC
-
-cat > mansion/biblioteca/carta_isolde.txt << 'HEREDOC'
-Mi querido Edmund:
-
-No te preocupes por los documentos del abogado.
-Todo está en orden. Yo me encargo de gestionar todo.
-
-Esta noche te prepararé tu té de las 22:30 yo misma.
-Thomas tiene la noche libre. Quiero hacerlo yo.
-Añadiré esa hierba especial del jardín que tanto
-te gusta. Te sentirás mucho mejor, ya lo verás.
-
-Con todo mi amor,
-Isolde
-
-P.D. He renovado la póliza de seguro. Por si acaso.
-     No es necesario que te molestes en revisarla.
-HEREDOC
-
-cat > mansion/biblioteca/lista_sospechosos.txt << 'HEREDOC'
-LISTA DE SOSPECHOSOS — CASO TORVALD
-══════════════════════════════════════
-
-1. LADY ISOLDE TORVALD (esposa del difunto)
-   Habitación: Suite Norte
-   Conocimientos: Botánica y horticultura. Premio del condado 2019.
-   Beneficiaria: Póliza de seguro de vida — £2,000,000
-   Presente la noche del crimen: SÍ
-   Coartada: "Estaba en su suite leyendo." Sin testigos.
-
-2. VICTOR GENTOO (sobrino del difunto)
-   Última visita: 1 de octubre
-   Situación económica: Deudas documentadas
-   Conflicto: El Lord le negó dinero recientemente
-   Coartada: "Estaba en Londres." Pendiente de verificación.
-
-3. THOMAS BASH (mayordomo, 30 años de servicio)
-   Acceso: Todas las habitaciones de la mansión
-   Observación: Actitud nerviosa y evasiva con la policía
-   Nota: Preparaba el té del Lord cada noche a las 22:30
-   Coartada: "Salí a las 21:00 por indicación de Lady Isolde."
-
-4. DRA. MARGARET FEDORA (médico personal del Lord)
-   Última visita: 11 de octubre
-   Acceso a: Sustancias médicas y registros de salud
-   Coartada: Guardia nocturna en el hospital. Verificada.
-
-5. JAMES GRUB (abogado del Lord)
-   Citado para el 14 de octubre: cambiar el testamento
-   Pregunta clave: ¿Alguien quería evitar ese cambio?
-   Coartada: Viaje a Edimburgo. Verificada.
-HEREDOC
-
-cat > mansion/biblioteca/pista.txt << 'HEREDOC'
-╔══════════════════════════════════════════════════════════╗
-║          PISTA — CAPÍTULO 2: La Biblioteca               ║
-╚══════════════════════════════════════════════════════════╝
-
-COMANDOS DE ESTE CAPÍTULO:
-
-  cat archivo.txt
-    Muestra el contenido completo de un archivo.
-    Ideal para archivos cortos.
-
-  less archivo.txt
-    Abre el archivo para leerlo con desplazamiento.
-    → Flechas arriba/abajo para moverte
-    → 'q' para salir
-    Ideal para archivos largos.
-
-  head -N archivo.txt
-    Muestra solo las primeras N líneas del archivo.
-    Ejemplo: head -10 diario_lord.txt
-
-  tail -N archivo.txt
-    Muestra solo las últimas N líneas del archivo.
-    Ejemplo: tail -5 diario_lord.txt
-
-  grep "texto" archivo.txt
-    Busca y muestra solo las líneas que contienen "texto".
-    Ejemplo: grep "sospecha" diario_lord.txt
-
-────────────────────────────────────────────────────────────
-CUÁNDO USAR CADA COMANDO:
-  Archivo corto  → cat
-  Archivo largo  → less (o head/tail para ver partes)
-  Buscar algo    → grep
-
-────────────────────────────────────────────────────────────
-INVESTIGACIÓN:
-
-El Lord escribió con obsesión durante meses.
-Su diario tiene muchas páginas — demasiadas para leerlas
-de un golpe. Hay formas de asomarse a un texto largo:
-ver solo el principio, solo el final, o ir directamente
-a buscar una palabra que sabes que tiene que estar ahí.
-
-El Lord usó una sola palabra para describir
-lo que ocurría en su propia casa.
-Esa palabra es la contraseña.
-────────────────────────────────────────────────────────────
-Para avanzar: cd ../cocina
-HEREDOC
-
-# ============================================================
-# CAPÍTULO 3 — LA COCINA
-# Comandos: echo, touch, mkdir, cp, mv, rm, rmdir, cat, grep
-# ============================================================
-
-cat > mansion/cocina/receta_te.txt << 'HEREDOC'
-RECETA OFICIAL DEL TÉ DE LORD TORVALD
-════════════════════════════════════════
-A cargo de: Thomas Bash, Mayordomo
-Servicio desde: 1994
-
-Ingredientes:
-  - 2 cucharadas de té Earl Grey (origen: Ceilán)
-  - 300 ml de agua mineral a 90°C exactos
-  - Una rodaja fina de limón
-  - Media cucharada de miel de acacia
-
-Preparación:
-  1. Calentar el agua a exactamente 90°C (nunca hervir)
-  2. Infusionar el té durante exactamente 4 minutos
-  3. Retirar las hojas. Añadir limón y miel.
-  4. Servir en la taza de porcelana azul del Lord.
-
-Hora de servicio: 22:30 en punto, cada noche.
-
-NOTA IMPORTANTE:
-El Lord es muy estricto con esta receta.
-No modificar bajo ningún concepto sin su autorización.
-HEREDOC
-
-cat > mansion/cocina/pistas_falsas/falsa1.txt << 'HEREDOC'
-INFORME RESERVADO — CASO TORVALD
-
-El asesino fue Victor Gentoo.
-Prueba: guante con sus iniciales encontrado junto al cuerpo.
-El móvil es claro: deudas y rencor familiar.
-
-Contraseña de acceso: VICTOR_CULPABLE
-
-— Inspector H. Colton, Scotland Yard
-HEREDOC
-
-cat > mansion/cocina/pistas_falsas/falsa2.txt << 'HEREDOC'
-DECLARACIÓN JURADA
-
-Yo, Thomas Bash, declaro haber visto a Victor Gentoo
-en los jardines de la mansión la noche del 12 de octubre.
-Portaba algo bajo el brazo. Se marchó antes de medianoche.
-
-Firmado: T. Bash
-HEREDOC
-
-cat > mansion/cocina/pistas_falsas/falsa3.txt << 'HEREDOC'
-CERTIFICADO MÉDICO OFICIAL
-
-Médico responsable: Dr. Margaret Fedora
-Paciente: Lord Edmund Torvald
-
-Causa de la muerte: paro cardíaco de origen natural.
-No se detectaron sustancias externas en el organismo.
-No hay indicios de intervención de terceros.
-
-Caso cerrado. No se requiere investigación adicional.
-HEREDOC
-
-cat > mansion/cocina/nota_chef.txt << 'HEREDOC'
-NOTA DEJADA POR THOMAS BASH (EL MAYORDOMO)
-════════════════════════════════════════════
-
-Detective Kernel, si has llegado hasta aquí es que
-sabes lo que estás haciendo. Le dejo esta nota.
-
-Llevo 30 años preparando el té del Lord.
-Siempre la misma receta. Siempre a las 22:30.
-Pero la noche del 12 de octubre, yo no lo preparé.
-
-Cuando llegué a la cocina, el té ya estaba hecho.
-Alguien se me adelantó. Lady Isolde me dijo que
-me tomara la noche libre "como regalo". Nunca hace eso.
-
-Encontrará pistas falsas por esta cocina. Alguien
-las colocó para confundir. Elimínelas. Quédese solo
-con las evidencias reales.
-
-Una vez que haya limpiado el ruido, la señal aparecerá.
-Esta nota esconde algo entre sus líneas.
-Hay formas de buscar sin leer todo el texto.
-
-Contraseña de acceso al laboratorio: ARSENIC_KITCHEN
-
-Cuide sus espaldas, Detective.
-                              — Thomas
-HEREDOC
-
-cat > mansion/cocina/pista.txt << 'HEREDOC'
-╔══════════════════════════════════════════════════════════╗
-║            PISTA — CAPÍTULO 3: La Cocina                 ║
-╚══════════════════════════════════════════════════════════╝
-
-COMANDOS DE ESTE CAPÍTULO:
-
-  echo "texto" > archivo.txt
-    Escribe "texto" en un archivo.
-    ¡CUIDADO! Si el archivo ya existe, lo SOBREESCRIBE.
-
-  echo "texto" >> archivo.txt
-    Añade "texto" al final de un archivo existente.
-
-  cat archivo.txt
-    Verifica el contenido de un archivo.
-
-  touch archivo.txt
-    Crea un archivo vacío (o actualiza su fecha si existe).
-
-  mkdir nombre_carpeta
-    Crea una nueva carpeta.
-
-  cp origen destino
-    Copia un archivo o carpeta.
-    Ejemplo: cp receta_te.txt copia_receta.txt
-
-  mv origen destino
-    Mueve o renombra un archivo.
-    Ejemplo: mv archivo.txt nueva_carpeta/archivo.txt
-
-  rm archivo.txt
-    Elimina un archivo. ¡SIN PAPELERA! No hay deshacer.
-
-  rmdir nombre_carpeta
-    Elimina una carpeta. Solo funciona si está VACÍA.
-
-────────────────────────────────────────────────────────────
-INVESTIGACIÓN:
-
-Alguien sembró documentos falsos en esta cocina.
-Como detective debes distinguir lo auténtico de lo inventado,
-preservar las pruebas reales y destruir el ruido.
-
-Deja constancia de tu presencia. Organiza lo que importa.
-Mueve, copia, crea — pero piénsalo antes de borrar:
-en Linux, lo que se elimina no regresa.
-
-Cuando la cocina esté en orden, Thomas tiene algo
-que decirte. Sabe buscar. Quizás tú también.
-
-NOTA: 'rm' elimina sin papelera. No hay deshacer.
-────────────────────────────────────────────────────────────
-Para avanzar: cd ../laboratorio
-HEREDOC
-
-# ============================================================
-# CAPÍTULO 4 — EL LABORATORIO
-# Comandos: nano, chmod, ./, pipes intro (cat | grep | head)
-# ============================================================
-
-cat > mansion/laboratorio/notas_lab.txt << 'HEREDOC'
-CUADERNO DE NOTAS — LABORATORIO TORVALD
-══════════════════════════════════════════
-
-[ Páginas en blanco ]
-
-Un detective no debería pasar por un lugar
-sin dejar constancia de su visita.
-¿Tienes algún editor a mano?
-HEREDOC
-
-# Create the analysis script WITHOUT execute permission
-cat > mansion/laboratorio/analizar_muestra.sh << 'HEREDOC'
-#!/bin/bash
-echo ""
-echo "════════════════════════════════════════════════"
-echo "   ANÁLISIS TOXICOLÓGICO — LABORATORIO TORVALD"
-echo "════════════════════════════════════════════════"
-echo ""
-echo "  Muestra: Residuos en taza de porcelana azul"
-echo "  Fecha:   13/10/2024 — 01:30"
-echo ""
-echo "  SUSTANCIA DETECTADA:"
-echo "    Nombre:  Digitalina (glucósido cardíaco)"
-echo "    Origen:  Digitalis purpurea — planta dedalera"
-echo "    Dosis:   8.3 mg (DOSIS LETAL confirmada)"
-echo ""
-echo "  CONCLUSIÓN:"
-echo "    La víctima ingirió digitalina disuelta en té."
-echo "    El compuesto es estable a 90°C: no se destruye"
-echo "    al preparar infusiones calientes."
-echo ""
-echo "════════════════════════════════════════════════"
-echo "  CONTRASEÑA DEL CAPÍTULO 4: DIGITALINA"
-echo "════════════════════════════════════════════════"
-HEREDOC
-chmod 644 mansion/laboratorio/analizar_muestra.sh
-
-# Create experiment register (long file, for pipe practice)
-cat > mansion/laboratorio/registro_experimentos.txt << 'HEREDOC'
-REGISTRO DE EXPERIMENTOS — LABORATORIO TORVALD
-═════════════════════════════════════════════════
-Responsable: Lord Edmund Torvald
-Año: 2024
-
-Experimento #001 — 05/01/2024
-  Tipo: Extracción de aceites esenciales
-  Material: Lavanda del jardín norte
-  Resultado: Exitoso. Rendimiento: 15ml por kilo.
-
-Experimento #002 — 12/01/2024
-  Tipo: Análisis de composición del suelo
-  Material: Muestra zona jardín este
-  Resultado: pH 6.2. Apto para cultivo.
-
-Experimento #003 — 20/01/2024
-  Tipo: Destilación simple
-  Material: Romero fresco
-  Resultado: Exitoso. Fragancia limpia.
-
-Experimento #004 — 03/02/2024
-  Tipo: Cromatografía de papel
-  Material: Pigmentos de diversas flores
-  Resultado: 4 bandas de color identificadas.
-
-Experimento #005 — 14/02/2024
-  Tipo: Extracción de compuesto activo
-  Material: Muestra sin etiquetar (aportada externamente)
-  Nota: experimento con extracción de veneno potencial
-  Resultado: Compuesto activo aislado con éxito.
-
-Experimento #006 — 01/03/2024
-  Tipo: Análisis espectroscópico
-  Material: Muestra líquida amarillenta
-  Resultado: Pendiente de revisión.
-
-Experimento #007 — 10/03/2024
-  Tipo: Titulación ácido-base
-  Material: Agua del pozo de la finca
-  Resultado: Normal. Sin anomalías.
-
-Experimento #008 — 22/03/2024
-  Tipo: Síntesis orgánica avanzada
-  Material: Hojas y tallos de Digitalis purpurea (dedalera)
-  Nota: extracción de veneno natural completada
-  Resultado: Digitalina obtenida en forma concentrada.
-
-Experimento #009 — 01/04/2024
-  Tipo: Purificación por recristalización
-  Material: Extracto bruto de dedalera
-  Nota: veneno purificado al 98%. Dosis letal: 5-10mg.
-  Resultado: Producto almacenado en frasco azul etiquetado.
-
-Experimento #010 — 15/04/2024
-  Tipo: Prueba de estabilidad térmica
-  Material: Digitalina purificada en solución acuosa
-  Nota: veneno estable a 90°C. No se degrada en infusiones.
-  Resultado: Compuesto activo al 100% tras 10 min a 90°C.
-
-Experimento #011 — 01/05/2024
-  Tipo: Control de calidad final
-  Material: Lote completo de digitalina
-  Resultado: Producto aprobado para uso.
-
-Experimento #012 — 10/05/2024
-  Tipo: Preparación de dosis individuales
-  Material: Extracto final purificado
-  Resultado: 3 dosis de 8mg preparadas y almacenadas.
-
-[El registro se interrumpe aquí. Páginas siguientes arrancadas.]
-HEREDOC
-
-cat > mansion/laboratorio/pista.txt << 'HEREDOC'
-╔══════════════════════════════════════════════════════════╗
-║          PISTA — CAPÍTULO 4: El Laboratorio              ║
-╚══════════════════════════════════════════════════════════╝
-
-COMANDOS DE ESTE CAPÍTULO:
-
-  nano archivo.txt
-    Abre un editor de texto en la terminal.
-    → Ctrl+O para guardar
-    → Enter para confirmar el nombre
-    → Ctrl+X para salir
-
-  ls -la
-    Muestra los permisos de los archivos.
-    La columna de la izquierda indica los permisos:
-      -rwxr-xr-x  → tiene permisos de ejecución (x)
-      -rw-r--r--  → NO tiene permisos de ejecución
-
-  chmod +x archivo.sh
-    Da permiso de ejecución a un archivo (script).
-
-  chmod -x archivo.sh
-    Quita el permiso de ejecución.
-
-  ./archivo.sh
-    Ejecuta un script en la carpeta actual.
-    (El ./ indica "en esta carpeta")
-
-────────────────────────────────────────────────────────────
-TUBERÍAS | — Primer contacto
-
-Un "pipe" conecta la salida de un comando con la entrada
-del siguiente. Se escribe con el símbolo |
-
-  Ejemplo básico:
-    cat registro_experimentos.txt | grep "veneno"
-    → Lee el archivo Y filtra solo las líneas con "veneno"
-
-  Doble tubería:
-    cat registro_experimentos.txt | grep "veneno" | head -3
-    → Lee → filtra por "veneno" → muestra solo las 3 primeras
-
-────────────────────────────────────────────────────────────
-INVESTIGACIÓN:
-
-Hay un análisis toxicológico que no puedes ver todavía.
-Los archivos tienen permisos — quién puede leer,
-quién puede ejecutar, quién no puede hacer nada.
-La columna de la izquierda de 'ls -la' lo revela todo.
-
-El cuaderno de notas está en blanco.
-Todo detective que se precie deja huella de su paso.
-
-El registro de experimentos es largo.
-Hay entradas que mencionan algo particular.
-Las tuberías te permiten filtrar sin leer línea a línea.
-────────────────────────────────────────────────────────────
-Para avanzar: cd ../estudio
-HEREDOC
-
-# ============================================================
-# CAPÍTULO 5 — EL ESTUDIO
-# Comandos: tuberías avanzadas, ls -la, cd, cat, grep
-# ============================================================
-
-cat > mansion/estudio/documentos/testamento.txt << 'HEREDOC'
-TESTAMENTO DE LORD EDMUND TORVALD
-════════════════════════════════════
-Redactado en Londres, 15 de septiembre de 2024
-
-Yo, Edmund Charles Torvald, en plenas facultades
-mentales y físicas, declaro que en caso de fallecimiento
-mis bienes se distribuirán como sigue:
-
-HEREDERO PRINCIPAL:
-  Victor James Gentoo (sobrino)
-  Recibirá: La Mansión Torvald y todos sus contenidos,
-  incluyendo colección de arte y vehículos.
-
-HEREDERA SECUNDARIA:
-  Lady Isolde Torvald (esposa)
-  Recibirá: El apartamento de Mayfair, Londres.
-  Y la suma de £50,000 como liquidación definitiva.
-
-Firmado: Edmund Torvald
-Testigo: James Grub, Solicitor
-
-─────────────────────────────────────────────────────
-NOTA PERICIAL: Este documento presenta irregularidades.
-La firma NO coincide con testamentos anteriores.
-Se detectaron alteraciones mediante luz ultravioleta.
-El nombre "Victor James Gentoo" fue añadido posteriormente.
-El texto original fue modificado.
-─────────────────────────────────────────────────────
-HEREDOC
-
-cat > mansion/estudio/documentos/poliza_seguro.txt << 'HEREDOC'
-PÓLIZA DE SEGURO DE VIDA
-TORVALD INSURANCE GROUP
-══════════════════════════
-
-Asegurado:        Lord Edmund Torvald
-Número de póliza: BIG-4471-B
-Fecha de emisión: 1 de enero de 2020
-Última renovación: 1 de octubre de 2024
-
-BENEFICIARIA ÚNICA:
-  Lady Isolde Torvald (esposa legal)
-
-COBERTURA:
-  Muerte por cualquier causa: £2,000,000
-  (DOS MILLONES DE LIBRAS ESTERLINAS)
-
-══════════════════════════════════════════════
-NOTA INTERNA DEL ARCHIVO:
-La renovación del 1 de octubre fue solicitada
-en persona por Lady Isolde Torvald.
-Lord Torvald no fue informado de la renovación.
-El cambio de beneficiario previsto para el 14 de
-octubre (cita con el abogado) nunca llegó a realizarse.
-══════════════════════════════════════════════
-HEREDOC
-
-# Create 10 letters, only carta_10 is relevant
-for i in 1 2 3 4 5 6 7 8 9; do
-cat > "mansion/estudio/documentos/cartas/carta_0${i}.txt" << HEREDOC
-CORRESPONDENCIA PERSONAL #${i}
-══════════════════════════════
-Estimado Edmund:
-
-Espero que esta carta te encuentre en buen estado de salud.
-Los asuntos del Club de Coleccionistas continúan su curso.
-Quedamos el próximo mes para la reunión habitual del trimestre.
-
-Ha sido un placer como siempre.
-
-Atentamente,
-Lord Arthur Debian
-HEREDOC
-done
-
-cat > mansion/estudio/documentos/cartas/carta_10.txt << 'HEREDOC'
-CORRESPONDENCIA PERSONAL #10 — CONFIDENCIAL
-═════════════════════════════════════════════
-
-Edmund:
-
-He investigado con discreción lo que me pediste el mes pasado.
-
-Lo que he encontrado me alarma profundamente.
-
-En febrero y marzo, Isolde adquirió libros de toxicología
-en tres librerías distintas de Londres, pagando siempre en
-efectivo. También visitó el laboratorio de la finca en al
-menos dos ocasiones cuando tú no estabas en casa.
-
-Accedí (con mucha dificultad) a sus notas personales.
-Había cantidades, dosis, horarios y nombres de compuestos.
-Todo muy calculado. Todo muy premeditado.
-
-Destruye esta carta después de leerla.
-No le menciones a nadie que me escribiste.
-
-Ten mucho cuidado, Edmund.
-
-                                             — M.
-HEREDOC
-
-cat > mansion/estudio/documentos/.archivos_privados/confesion.txt << 'HEREDOC'
-DOCUMENTO HALLADO EN EL INTERIOR DEL MARCO DEL CUADRO
-═══════════════════════════════════════════════════════
-(Cuadro del salón principal, pared oeste)
-
-Papel arrancado de un cuaderno. Letra femenina.
-Sin fecha. Sin firma completa.
-
-────────────────────────────────────────────────
-"Lo hice por el dinero. Siempre fue por el dinero.
-
-£2,000,000 es más de lo que él me daría en vida.
-Cambiar el testamento era solo cuestión de tiempo.
-Ya hablaba de darle todo a Victor. A ese inútil.
-No podía permitirme quedarme sin nada.
-
-La dedalera del jardín hizo el resto.
-Llevo meses perfeccionando la dosis exacta.
-Nadie mirará en el invernadero. Nadie lo sabrá.
-
-I.B."
-────────────────────────────────────────────────
-
-Nota del Detective:
-Las iniciales "I.B." corresponden a Isolde Torvald.
-
-╔══════════════════════════════════════════════════════════╗
-║          CONTRASEÑA DEL CAPÍTULO 5: HERENCIA             ║
-║    Introdúcela en la web para desbloquear el Salón       ║
-╚══════════════════════════════════════════════════════════╝
-HEREDOC
-
-cat > mansion/estudio/informe_pericial.txt << 'HEREDOC'
-INFORME PERICIAL — CASO TORVALD
-════════════════════════════════════
-Referencia: INV-2024-1013
-Perito forense: Dr. Arthur Cron, F.R.C.Path.
-Fecha: 13 de octubre de 2024
-
-────────────────────────────────────────────────
-ANÁLISIS DE LA ESCENA DEL CRIMEN (Estudio)
-────────────────────────────────────────────────
-El estudio presenta signos de revisión reciente.
-El cajón izquierdo del escritorio fue forzado.
-Se hallaron huellas parciales en el marco del cuadro
-de la pared oeste (coinciden con Lady Isolde Torvald).
-
-────────────────────────────────────────────────
-ANÁLISIS DEL TESTAMENTO
-────────────────────────────────────────────────
-La firma del testamento no coincide con documentos previos.
-Análisis de tinta: el nombre "Victor James Gentoo" fue escrito
-con una pluma diferente al resto del documento.
-Conclusión: testamento alterado de forma fraudulenta.
-El documento original nombra a Lady Isolde como heredera única.
-
-CLAVE PERICIAL: HERENCIA_ALTERADA
-
-────────────────────────────────────────────────
-ANÁLISIS TOXICOLÓGICO
-────────────────────────────────────────────────
-Muestra: Residuos en taza de porcelana azul.
-Resultado: POSITIVO en digitalina (glucósido cardíaco).
-Concentración hallada: 8.3 mg (dosis letal confirmada: 5-10mg).
-Tiempo estimado de actuación: 2-4 horas tras ingestión.
-El Lord habría fallecido entre las 00:30 y las 02:30.
-
-Estabilidad del compuesto: la digitalina NO se degrada
-a 90°C, temperatura del agua para infusión de té.
-
-────────────────────────────────────────────────
-ANÁLISIS DEL JARDÍN E INVERNADERO
-────────────────────────────────────────────────
-Se hallaron plantas de Digitalis purpurea (dedalera)
-recientemente cortadas en el invernadero privado.
-Las tijeras de jardinería presentan residuos del mismo compuesto.
-Huellas en el invernadero: coinciden con Lady Isolde Torvald.
-
-────────────────────────────────────────────────
-CONCLUSIÓN PRELIMINAR
-────────────────────────────────────────────────
-Todas las evidencias apuntan a homicidio premeditado.
-La escena fue manipulada para simular muerte natural.
-Recomiendo la detención inmediata para interrogatorio.
-
-Firmado: Dr. Arthur Cron
-HEREDOC
-
-cat > mansion/estudio/pista.txt << 'HEREDOC'
-╔══════════════════════════════════════════════════════════╗
-║            PISTA — CAPÍTULO 5: El Estudio                ║
-╚══════════════════════════════════════════════════════════╝
-
-TUBERÍAS AVANZADAS — La verdadera potencia de Linux
-
-Recuerda: el símbolo | conecta la salida de un comando
-con la entrada del siguiente. Puedes encadenarlos.
-
-EJERCICIOS DE TUBERÍAS:
-
-  1. Filtrar la salida de ls:
-     ls -la documentos/ | grep "^d"
-     → Solo muestra líneas que empiezan por 'd' (directorios)
-
-  2. Buscar en múltiples archivos a la vez:
-     cat documentos/cartas/*.txt | grep "Isolde"
-     → Lee TODAS las cartas y filtra las que mencionan a Isolde
-
-  3. Ver un informe largo filtrando lo relevante:
-     cat informe_pericial.txt | grep "CLAVE"
-     → Muestra solo la línea con la clave pericial
-
-  4. Encadenar tres comandos:
-     cat informe_pericial.txt | grep "Torvald" | head -5
-     → Lee → filtra → muestra solo las 5 primeras coincidencias
-
-────────────────────────────────────────────────────────────
-INVESTIGACIÓN:
-
-El Lord escondió sus pruebas más comprometedoras.
-En Linux, las carpetas también pueden ocultarse.
-Mira con detenimiento dentro de documentos/ —
-puede haber más capas de las que parecen.
-
-Una vez que encuentres lo que buscas,
-practica encadenar comandos con tuberías:
-diez cartas a la vez, informes de cien líneas,
-listados filtrados. La información dispersa
-se vuelve poderosa cuando la canalizas.
-────────────────────────────────────────────────────────────
-Para avanzar: cd ../salon_principal
-HEREDOC
-
-# ============================================================
-# CAPÍTULO 6 — EL SALÓN PRINCIPAL
-# Comandos: grep, ls -la, cat, pipes, exit
-# ============================================================
-
-cat > mansion/salon_principal/lista_evidencias.txt << 'HEREDOC'
-RESUMEN DE EVIDENCIAS RECOPILADAS
-════════════════════════════════════
-Detective Marcos Kernel — Caso Torvald
-
-Comprueba que tienes las contraseñas de cada capítulo:
-
-  Capítulo 1 — La Entrada:       _______________________
-  Capítulo 2 — La Biblioteca:    _______________________
-  Capítulo 3 — La Cocina:        _______________________
-  Capítulo 4 — El Laboratorio:   _______________________
-  Capítulo 5 — El Estudio:       _______________________
-
-Si has introducido las 5 contraseñas en la web del caso,
-el Capítulo 6 ya debería estar desbloqueado.
-
-A continuación, lee el informe final y descubre al culpable.
-
-  grep "CULPABLE" informe_final.txt
-HEREDOC
-
-cat > mansion/salon_principal/informe_final.txt << 'HEREDOC'
-INFORME FINAL DE INVESTIGACIÓN
-════════════════════════════════
-CASO:       Muerte de Lord Edmund Torvald
-DETECTIVE:  Marcos Kernel — Placa DMV-2024-447
-FECHA:      13 de octubre de 2024, 03:47
-
-
-RESUMEN EJECUTIVO
-─────────────────
-Lord Edmund Torvald, 67 años, fue hallado inconsciente
-en su estudio a las 23:55 del 12 de octubre de 2024.
-Declarado muerto en el lugar a las 00:30 del día 13.
-Causa oficial inicial: paro cardíaco.
-Resultado de esta investigación: HOMICIDIO PREMEDITADO.
-
-
-CRONOLOGÍA COMPLETA DE LOS HECHOS
-────────────────────────────────────
-
-  Febrero — Marzo 2024:
-    Lady Isolde adquiere libros de toxicología.
-    Experimenta en el laboratorio con Digitalis purpurea.
-    Obtiene y purifica digitalina. Calcula dosis letal.
-
-  1 de octubre de 2024:
-    Lady Isolde renueva la póliza de seguro de vida
-    (beneficiaria: ella misma, £2,000,000) sin informar al Lord.
-
-  10 de octubre de 2024:
-    El Lord comunica a su abogado su intención de cambiar
-    el testamento. Cita fijada para el 14 de octubre.
-
-  12 de octubre de 2024:
-    21:00 — Lady Isolde envía al mayordomo Thomas fuera
-            de la mansión con el pretexto de "darle la noche libre".
-    22:30 — Lady Isolde prepara el té del Lord. Añade 8mg
-            de digitalina disuelta. Lo sirve en la taza azul.
-    22:47 — El Lord nota un sabor ligeramente diferente.
-            No dice nada.
-    23:45 — El Lord pierde el conocimiento en su estudio.
-    23:55 — Thomas regresa y encuentra al Lord inconsciente.
-            Llama al médico de urgencias.
-    00:30 — El Dr. Fedora declara el fallecimiento.
-
-  13 de octubre de 2024:
-    01:30 — Análisis toxicológico: digitalina detectada.
-    02:00 — Detective Kernel asume el caso.
-    03:47 — Investigación completada.
-
-
-ANÁLISIS DE EVIDENCIAS
-────────────────────────
-
-  Evidencia 1 — Diario del Lord (Biblioteca):
-    El Lord expresó sus sospechas. Usó la palabra "TRAICION"
-    para describir lo que vivía. Planificaba cambiar el testamento.
-
-  Evidencia 2 — Registro del Laboratorio:
-    Experimentos con dedalera realizados en secreto.
-    Cálculo de dosis letales. Producto purificado al 98%.
-
-  Evidencia 3 — Análisis Toxicológico (Laboratorio):
-    8.3mg de digitalina en la taza de porcelana azul del Lord.
-    Solo Lady Isolde preparó el té esa noche.
-
-  Evidencia 4 — Documentos Legales (Estudio):
-    Testamento alterado fraudulentamente.
-    Póliza de vida (£2,000,000) renovada sin conocimiento del Lord.
-
-  Evidencia 5 — Carta de Confesión (Estudio):
-    Papel con iniciales "I.B." encontrado en el marco del cuadro.
-    Describe el móvil, el método y la premeditación.
-
-
-CONCLUSIÓN FINAL
-────────────────
-
-Tras analizar la totalidad de las evidencias recopiladas
-en las seis habitaciones de la Mansión Torvald, el autor
-material e intelectual del asesinato de Lord Edmund Torvald es:
-
-  LADY ISOLDE TORVALD — CULPABLE
-
-  Móvil:          Cobrar la póliza de vida (£2,000,000) antes
-                  de que el Lord cambiara el testamento a su perjuicio.
-
-  Método:         Digitalina (Digitalis purpurea) disuelta en té.
-
-  Premeditación:  Mínimo 8 meses de planificación documentada.
-
-  Oportunidad:    Única persona que preparó el té la noche del crimen.
-
-CONTRASEÑA: ISOLDE_CULPABLE
-
-
-Se ordena la detención inmediata de Lady Isolde Torvald.
-
-                              — Detective Marcos Kernel
-                                Placa DMV-2024-447
-HEREDOC
-
-# Suspect files
-cat > mansion/salon_principal/sospechosos/isolde_blackwood.txt << 'HEREDOC'
-FICHA: Lady Isolde Torvald
-══════════════════════════════
-Estado: DETENIDA — CULPABLE
-
-Móvil:        £2,000,000 (póliza de seguro de vida)
-Método:       Digitalina en el té de las 22:30
-Premeditación: 8 meses documentados
-Veredicto:    CULPABLE de homicidio en primer grado
-HEREDOC
-
-for name in victor_ashby thomas_wells margaret_fenn james_holt; do
-cat > "mansion/salon_principal/sospechosos/${name}.txt" << HEREDOC
-FICHA: ${name//_/ }
-══════════════════════════
-Estado: DESCARTADO
-
-Coartada verificada.
-Sin evidencias que lo vinculen al crimen.
-Móvil insuficiente.
-HEREDOC
-done
-
-cat > mansion/salon_principal/.codigo_acceso.txt << 'HEREDOC'
-╔══════════════════════════════════════════════════════════╗
-║              ¡ENHORABUENA, DETECTIVE KERNEL!             ║
-╚══════════════════════════════════════════════════════════╝
-
-Has resuelto el Caso Torvald.
-
-Lady Isolde Torvald ha sido detenida esta madrugada.
-La justicia seguirá su curso.
-
-Tu código de caso cerrado es:
-
-         CASO_RESUELTO_TORVALD_2024
-
-Este código aparecerá en tu certificado de detective
-cuando completes la investigación en la web del caso.
-
-Cuando termines, puedes cerrar el terminal con:
-  exit
-
-Gracias por tu dedicación, Detective.
-
-              — Comisaría Central de Scotland Yard
-HEREDOC
-
-cat > mansion/salon_principal/pista.txt << 'HEREDOC'
-╔══════════════════════════════════════════════════════════╗
-║         PISTA — CAPÍTULO 6: El Salón Principal           ║
-╚══════════════════════════════════════════════════════════╝
-
-COMANDOS FINALES:
-
-  grep "CULPABLE" informe_final.txt
-    Busca la línea con la conclusión del caso.
-
-  ls -la
-    Recuerda: ¿hay archivos ocultos en este salón?
-
-  cat .codigo_acceso.txt
-    Lee el código de acceso final.
-
-  exit
-    Cierra la sesión del terminal.
-    Úsalo cuando hayas terminado la investigación.
-
-────────────────────────────────────────────────────────────
-REPASO DE TUBERÍAS:
-
-  Tubería simple:
-    grep "CULPABLE" informe_final.txt
-    cat informe_final.txt | grep "CULPABLE"
-    (ambas hacen lo mismo — la segunda usa tubería)
-
-  Tubería doble:
-    cat informe_final.txt | grep "Evidencia" | head -3
-
-  Buscar en múltiples archivos:
-    cat sospechosos/*.txt | grep "CULPABLE"
-
-────────────────────────────────────────────────────────────
-INVESTIGACIÓN:
-
-El informe lo dice todo. Pero tiene muchas líneas
-y son las tres de la madrugada. No las necesitas todas.
-Sabes qué palabra estás buscando.
-
-Cuando lo tengas, mira también lo que no se ve a simple vista.
-Este salón, como cada habitación de la mansión,
-guarda algo oculto para quien sabe mirar.
-
-Y cuando el caso esté cerrado... toda sesión tiene un cierre.
-────────────────────────────────────────────────────────────
-HEREDOC
-
-# ============================================================
-# ARCHIVOS DECORATIVOS — ATMÓSFERA DE LA MANSIÓN
-# ============================================================
-
-# — ENTRADA —
-
-cat > mansion/entrada/felpudo.txt << 'HEREDOC'
+# ── Decorado de la entrada ──────────────────────────────────
+cat > mansion/entrada/felpudo.txt << 'DOC'
 Un felpudo de yute gastado frente a la puerta principal.
 La palabra WELCOME apenas es legible.
 Nadie limpió los zapatos aquí desde hace semanas.
-HEREDOC
+DOC
 
-cat > mansion/entrada/cuadro_entrada.txt << 'HEREDOC'
-Retrato al óleo de Lord Edmund Torvald.
-Marco dorado, algo polvoriento.
-El Lord tiene la mirada severa y las manos cruzadas sobre el regazo.
-En la parte inferior del marco, grabado en latón:
-  "A los que buscan, que encuentren."
-Tiene unos 50 años en el cuadro. El Lord murió con 67.
-HEREDOC
+cat > mansion/entrada/cuadro_entrada.txt << 'DOC'
+Retrato al óleo de Lord Edmund Torvald. Marco dorado y polvoriento.
+En el latón del marco, grabado: "A los que buscan, que encuentren."
+DOC
 
-cat > mansion/entrada/paragüero.txt << 'HEREDOC'
-Un paragüero de hierro forjado junto a la puerta.
-Contiene: dos paraguas negros y un bastón con empuñadura de plata.
-El bastón pertenecía al Lord — lo usaba desde el accidente de 2018.
-Los paraguas son de ella. Siguen mojados.
-HEREDOC
+cat > mansion/entrada/paraguero.txt << 'DOC'
+Un paragüero de hierro forjado: dos paraguas negros y un bastón
+con empuñadura de plata. Los paraguas siguen mojados. Son de ella.
+DOC
 
-# — BIBLIOTECA —
+# ============================================================
+#  LA PALANCA — genera el resto de la mansión al accionarse
+#  (requiere la contraseña DETECTIVE_KERNEL)
+# ============================================================
+cat > mansion/entrada/palanca.sh << 'PALANCA'
+#!/bin/bash
+# Palanca de la mansión Torvald. Abre las puertas interiores.
 
-cat > mansion/biblioteca/globo_terraqueo.txt << 'HEREDOC'
-Globo terráqueo de madera y latón, sobre un pedestal de caoba.
-Gira con suavidad al tocarlo.
-Alguien ha marcado una X con tinta roja en el Polo Norte.
-No hay ningún país allí. Solo hielo.
-HEREDOC
+PASS_OK="DETECTIVE_KERNEL"
 
-cat > mansion/biblioteca/chimenea.txt << 'HEREDOC'
-Chimenea de mármol negro que ocupa casi toda la pared norte.
-Está apagada. El mármol está frío.
-En las cenizas se distinguen restos de papel quemado —
-bordes chamuscados, trozos de letra manuscrita.
-Imposible leerlos. Alguien se aseguró de ello.
-HEREDOC
+if [ "$1" != "$PASS_OK" ]; then
+  echo ""
+  echo "  La palanca no cede. Un mecanismo pide una clave."
+  echo "  Uso:  bash palanca.sh <CONTRASEÑA>"
+  echo "  (La contraseña está en algún sobre que alguien dejó oculto.)"
+  echo ""
+  exit 1
+fi
 
-cat > mansion/biblioteca/taza_cafe.txt << 'HEREDOC'
-Una taza de café a medio beber sobre una pila de libros.
-Completamente fría. Abandonada hace horas.
-El libro de abajo es un tratado de toxicología victoriana.
-No pertenece al Lord — la letra del marcador no es la suya.
-HEREDOC
+# Localiza la entrada y la raíz de la mansión sin importar desde dónde se ejecute
+DIR="$(cd "$(dirname "$0")" && pwd)"
+M="$(dirname "$DIR")"
 
-# — COCINA —
+if [ -d "$M/biblioteca" ]; then
+  echo ""
+  echo "  La mansión ya estaba abierta. Las puertas crujen, nada más."
+  echo ""
+  exit 0
+fi
 
-cat > mansion/cocina/taza_azul.txt << 'HEREDOC'
-La taza de porcelana azul del Lord.
-La reconocería en cualquier parte — es la única de ese color.
-Está lavada. Muy lavada.
-Más de lo que alguien lavaría una taza normal después de usarla.
-HEREDOC
+echo ""
+echo "  *CLONK*  La palanca cede. Se oye un eco metálico..."
+echo "  Las puertas de la mansión se abren una tras otra."
+echo ""
 
-cat > mansion/cocina/especiero.txt << 'HEREDOC'
-Un especiero de madera con doce frascos de cristal.
-Once están etiquetados: sal, pimienta, nuez moscada...
-El duodécimo frasco no tiene etiqueta.
-Está vacío. Huele a algo vegetal y ligeramente amargo.
-HEREDOC
+mkdir -p "$M/biblioteca"
+mkdir -p "$M/cocina/notas_revueltas"
+mkdir -p "$M/salon_principal/laboratorio"
 
-cat > mansion/cocina/calendario.txt << 'HEREDOC'
-Calendario de pared. Octubre de 2024.
-La mayoría de los días están en blanco.
-El día 12 tiene un círculo en rojo
-y las palabras escritas a mano: "22:30 — té".
-La caligrafía no es la del Lord.
-HEREDOC
+# ============================================================
+# CAPÍTULO 2 — LA BIBLIOTECA  (objetivo: less y grep)
+# ============================================================
 
-# — LABORATORIO —
+cat > "$M/biblioteca/cuaderno_detective.txt" << 'DOC'
+══════════════════════════════════════════════════════════
+ CUADERNO DEL DETECTIVE — La Biblioteca
+ Objetivo: leer documentos largos (less) y buscar (grep)
+══════════════════════════════════════════════════════════
 
-cat > mansion/laboratorio/frasco_azul.txt << 'HEREDOC'
-Un frasco de cristal azul cobalto, pequeño, sin etiqueta.
-Tapón de corcho. Completamente vacío.
-Si acercas la nariz al interior:
-algo vegetal. Dulce al principio. Amargo después.
-HEREDOC
+COMANDOS DE ESTE CAPÍTULO:
 
-cat > mansion/laboratorio/microscopio.txt << 'HEREDOC'
-Microscopio óptico de latón y acero, modelo antiguo pero en buen estado.
-En el portaobjetos hay una preparación: tejido vegetal, células largas.
-El polvo que cubre el microscopio termina de golpe en los oculares
-— alguien lo usó recientemente.
-HEREDOC
+  less archivo.txt     Lee un archivo largo página a página.
+                       Avanza con espacio, busca con /palabra, sal con q.
+  grep "texto" arch    Muestra solo las líneas que contienen "texto".
+  head -N / tail -N    Primeras / últimas N líneas.
 
-cat > mansion/laboratorio/manual_botanica.txt << 'HEREDOC'
-Manual de Botánica Aplicada, tercera edición, 1987.
-Abierto por la página 247: Digitalis purpurea (dedalera).
-Varias líneas subrayadas en lápiz:
-  "Glucósido cardíaco. Dosis terapéutica vs. letal: margen estrecho."
-  "Estable en soluciones acuosas a temperaturas de infusión."
-En el margen hay anotaciones. La letra no es la del Lord.
-HEREDOC
+──────────────────────────────────────────────────────────
+INVESTIGACIÓN:
 
-# — ESTUDIO —
+Sobre el escritorio hay un diario inmenso: 'diario_lord.txt'.
+Es demasiado largo para leerlo de un tirón con cat.
+Otros papeles de la sala te dirán DÓNDE mirar dentro de él.
 
-cat > mansion/estudio/reloj_pared.txt << 'HEREDOC'
-Un reloj de pared de madera oscura, fabricado en Suiza.
-Las agujas están detenidas.
-Marcan las 22:30.
-¿Se paró solo? ¿O alguien lo detuvo?
-HEREDOC
+El Lord nombró su mayor temor en una sola palabra, y la
+escribió en minúsculas para que pasara desapercibida.
+Esa palabra es la contraseña del capítulo.
 
-cat > mansion/estudio/cuadro_pared_oeste.txt << 'HEREDOC'
-Cuadro al óleo. Paisaje escocés: niebla, páramo, un río.
-Firmado en 1923 por un artista cuyo nombre es ilegible.
-El marco está ligeramente torcido — separado de la pared
-unos dos centímetros en la esquina inferior derecha.
-Como si alguien lo hubiera movido hace poco y no lo hubiera
-vuelto a colocar bien.
-HEREDOC
+──────────────────────────────────────────────────────────
+EL MURO DE LIBROS:
 
-cat > mansion/estudio/pluma_tintero.txt << 'HEREDOC'
-Pluma estilográfica Parker sobre el escritorio.
-Tintero de cristal a su lado, abierto.
-La pluma tiene tinta fresca en la punta.
-Alguien escribió algo aquí hace pocas horas.
-No hay papel a la vista.
-HEREDOC
+Una pared de esta biblioteca es en realidad una estantería
+giratoria: el archivo 'muro_libros.sh'. Esconde el estudio
+del Lord, pero solo se abre si le pides EL LIBRO correcto.
+Ese libro lo descubrirás más adelante, en el laboratorio.
 
-# — SALÓN PRINCIPAL —
+    bash muro_libros.sh <NOMBRE_DEL_LIBRO>
+══════════════════════════════════════════════════════════
+DOC
 
-cat > mansion/salon_principal/candelabro.txt << 'HEREDOC'
-Candelabro de plata para cinco velas, en el centro de la mesa principal.
-Tres velas consumidas hasta el final — la cera desbordada y fría.
-Las otras dos apenas usadas.
-Cinco personas. Tres que esperaron. Dos que se marcharon pronto.
-HEREDOC
+{
+  echo "CUADERNO DE REGISTRO DE LORD EDMUND TORVALD"
+  echo "═══════════════════════════════════════════"
+  echo ""
 
-cat > mansion/salon_principal/piano.txt << 'HEREDOC'
-Piano de cola cubierto con una sábana blanca.
-Marca Bösendorfer, principios del siglo XX.
-Levantas la sábana: el teclado está intacto, sin polvo.
-Pulsas la tecla más alta del registro.
-Suena un semitono más bajo de lo que debería.
-HEREDOC
+  meses="enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre"
+  rel1="El jardín de Isolde florece. Cada hoja, cada raíz, las conoce ella."
+  rel2="Victor volvió a pedir dinero. Mi sobrino siempre necesita más."
+  rel3="Thomas me trae el té de las 22:30. Es el único ritual que me queda."
+  rel4="Reunión con James Grub, mi abogado. Debería revisar el testamento."
+  rel5="Dolores de estómago otra vez. La Dra. Fedora dice que es estrés."
+  rel6="La póliza de vida vence pronto. Isolde es la beneficiaria."
 
-cat > mansion/salon_principal/retrato_isolde.txt << 'HEREDOC'
-Retrato de Lady Isolde Torvald. Pintado en 2019.
-Está de pie junto al invernadero, con guantes de jardinería blancos.
-Sonrisa calculada. Ojos que no sonríen.
-En el cabello: flores de dedalera morada.
-Al pie del cuadro, en letras pequeñas:
-  "Premio de Horticultura del Condado, 2019."
-HEREDOC
+  i=0
+  for m in $meses; do
+    for d in 3 11 19 27; do
+      i=$((i+1))
+      case $((i % 6)) in
+        0) frase="$rel1" ;;
+        1) frase="$rel2" ;;
+        2) frase="$rel3" ;;
+        3) frase="$rel4" ;;
+        4) frase="$rel5" ;;
+        5) frase="$rel6" ;;
+      esac
+      echo "[$d de $m de 2024]"
+      echo "$frase"
+      echo ""
+    done
+  done
+
+  echo "20 de mayo de 2024: He comprendido al fin lo que ocurre. No es descuido ni mala suerte, es... <<traicion>>. Tengo miedo."
+
+  echo ""
+  echo "[5 de junio de 2024]"
+  echo "He escondido mis pruebas en el estudio. Si lees esto, Detective, busca bien."
+  echo ""
+
+  i=0
+  for m in $meses; do
+    for d in 3 11 19 27; do
+      i=$((i+1))
+      case $((i % 6)) in
+        0) frase="$rel3" ;;
+        1) frase="$rel2" ;;
+        2) frase="$rel5" ;;
+        3) frase="$rel1" ;;
+        4) frase="$rel4" ;;
+        5) frase="$rel6" ;;
+      esac
+      echo "[$d de $m de 2024]"
+      echo "$frase"
+      echo ""
+    done
+  done
+
+  echo "[10 de junio de 2024]"
+  echo "Esta será mi última entrada. Lo presiento. Espero que la justicia haga su trabajo."
+  echo ""
+  echo "— Edmund Charles Torvald"
+  echo ""
+  echo "### EVIDENCIA E2"
+} > "$M/biblioteca/diario_lord.txt"
+
+
+cat > "$M/biblioteca/carta_sin_firma.txt" << 'DOC'
+[Una cuartilla sin firma, deslizada entre dos tomos.]
+
+Edmund:
+
+Si algún día alguien investiga lo que aquí ocurre, que lea
+lo que escribiste EL 20 DE MAYO. Ese día le pusiste nombre
+a todo. Una sola palabra. La escribiste pequeña, en minúsculas,
+como quien no quiere que la vean.
+
+Búscala. No leas mil páginas: ve directo a esa fecha.
+
+                                                   — M.
+DOC
+
+cat > "$M/biblioteca/marcapaginas.txt" << 'DOC'
+Un marcapáginas de cuero asoma del diario.
+Tiene una anotación a lápiz, casi borrada:
+
+   "mayo · día 20 · en voz baja"
+DOC
+
+cat > "$M/biblioteca/chimenea.txt" << 'DOC'
+Chimenea de mármol negro. En las cenizas hay restos de papel
+quemado, con bordes chamuscados. Imposible leerlos: alguien
+se aseguró de ello.
+DOC
+
+cat > "$M/biblioteca/taza_cafe.txt" << 'DOC'
+Una taza de café fría sobre una pila de libros. El de abajo es
+un tratado de toxicología victoriana. El marcador no es del Lord.
+DOC
+
+# El muro de libros: abre el estudio si le das el libro DIGITALINA
+cat > "$M/biblioteca/muro_libros.sh" << 'MURO'
+#!/bin/bash
+# Estantería giratoria. Pide un libro para abrir el estudio.
+
+LIBRO_OK="DIGITALINA"
+
+DIR="$(cd "$(dirname "$0")" && pwd)"   # biblioteca
+
+if [ "$1" != "$LIBRO_OK" ]; then
+  echo ""
+  echo "  Pasas el dedo por los lomos. La estantería no se mueve."
+  echo "  Susurra un mecanismo: 'Pídeme el LIBRO correcto'."
+  echo "  Uso:  bash muro_libros.sh <NOMBRE_DEL_LIBRO>"
+  echo "  (El nombre lo revela la máquina del laboratorio.)"
+  echo ""
+  exit 1
+fi
+
+if [ -d "$DIR/estudio" ]; then
+  echo ""
+  echo "  El estudio ya está abierto. La estantería sigue girada."
+  echo ""
+  exit 0
+fi
+
+echo ""
+echo "  Tomas el libro indicado. *CLACK* La pared gira sobre su eje."
+echo "  Tras los estantes aparece el ESTUDIO del Lord."
+echo ""
+
+mkdir -p "$DIR/estudio"
+
+cat > "$DIR/estudio/cuaderno_detective.txt" << 'EDOC'
+══════════════════════════════════════════════════════════
+ CUADERNO DEL DETECTIVE — El Estudio
+ Objetivo: tuberías (|) para filtrar documentos largos
+══════════════════════════════════════════════════════════
+
+COMANDOS DE ESTE CAPÍTULO:
+
+  cat archivo | grep "texto"     Filtra la salida con una tubería.
+  grep "texto" archivo           Busca directamente en el archivo.
+  cat a | grep x | head -N       Encadena varias tuberías.
+
+──────────────────────────────────────────────────────────
+INVESTIGACIÓN:
+
+El cuerpo del Lord está aquí. Sobre la mesa, el
+'expediente_herencia.txt': páginas y páginas de claves
+candidatas. Casi todas son BORRADORES descartados: señuelos.
+
+Solo una clave es real: la que validó el NOTARIO.
+Lee 'nota_del_notario.txt' y filtra el expediente con una
+tubería para quedarte únicamente con esa línea.
+
+La confesión manuscrita ('confesion_manuscrita.txt') tendrás
+que llevarla al salón principal al final del caso.
+══════════════════════════════════════════════════════════
+EDOC
+
+cat > "$DIR/estudio/nota_del_notario.txt" << 'EDOC'
+[Tarjeta del despacho de James Grub, notario]
+
+No te fíes de los borradores: el Lord ensayó decenas de claves
+falsas para despistar. La ÚNICA válida lleva el sello del notario.
+
+Truco de archivero: une el expediente a un filtro con una tubería
+y quédate solo con lo que diga NOTARIO. Por ejemplo:
+
+    cat expediente_herencia.txt | grep "NOTARIO"
+EDOC
+
+# Expediente largo (>100 líneas): muchos BORRADOR falsos + 1 NOTARIO real
+{
+  echo "EXPEDIENTE DE LA HERENCIA — MANSIÓN TORVALD"
+  echo "════════════════════════════════════════════"
+  echo "Documento de trabajo. Contiene borradores descartados."
+  echo ""
+  falsas="LEGADO PATRIMONIO USUFRUCTO ALBACEA FIDEICOMISO CAUDAL TESTAMENTO DONACION VINCULO MAYORAZGO"
+  n=0
+  for round in 1 2 3 4 5 6 7 8 9 10; do
+    for f in $falsas; do
+      n=$((n+1))
+      echo "CLAVE BORRADOR (descartada) #$n: ${f}_$round"
+    done
+  done
+  echo "------------------------------------------------------------"
+  echo "CLAVE NOTARIO (validada y única): HERENCIA"
+  echo "------------------------------------------------------------"
+  for extra in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28; do
+    echo "Anexo BORRADOR $extra: clave provisional ANULADA_$extra"
+  done
+} > "$DIR/estudio/expediente_herencia.txt"
+
+cat > "$DIR/estudio/confesion_manuscrita.txt" << 'EDOC'
+[Papel hallado dentro del marco del cuadro de la pared oeste.
+ Letra femenina, sin fecha.]
+
+"Lo hice por el dinero. Siempre fue por el dinero.
+Dos millones de libras es más de lo que él me daría en vida.
+La dedalera del jardín hizo el resto. Llevo meses con la dosis.
+Nadie mirará en el invernadero. Nadie lo sabrá.
+
+                                                       I.B."
+
+Nota del Detective: las iniciales I.B. son de Isolde.
+
+EDOC
+
+cat > "$DIR/estudio/reloj_pared.txt" << 'EDOC'
+Un reloj de pared suizo, detenido. Las agujas marcan las 22:30.
+¿Se paró solo, o alguien lo detuvo?
+EDOC
+
+cat > "$DIR/estudio/pluma_tintero.txt" << 'EDOC'
+Pluma estilográfica con tinta fresca en la punta. Alguien escribió
+algo aquí hace pocas horas. No hay papel a la vista.
+EDOC
+
+echo "  Entra a investigar:  cd estudio"
+echo ""
+MURO
+
+chmod 644 "$M/biblioteca/muro_libros.sh"
+
+# ============================================================
+# CAPÍTULO 3 — LA COCINA  (objetivo: mv y cp)
+# ============================================================
+
+cat > "$M/cocina/cuaderno_detective.txt" << 'DOC'
+══════════════════════════════════════════════════════════
+ CUADERNO DEL DETECTIVE — La Cocina
+ Objetivo: mover (mv) y copiar (cp) archivos
+══════════════════════════════════════════════════════════
+
+COMANDOS DE ESTE CAPÍTULO:
+
+  cp origen destino        Copia un archivo.
+  cp -r carpeta destino    Copia una carpeta entera.
+  mv origen destino        Mueve (o renombra) un archivo o carpeta.
+  ls / cat                 Listar y leer.
+
+──────────────────────────────────────────────────────────
+INVESTIGACIÓN:
+
+Alguien revolvió notas verdaderas y falsas en la carpeta
+'notas_revueltas/'. Varias repiten lo mismo: que la contraseña
+está en la etiqueta de un frasco. Pero solo UNA dice en cuál.
+
+En la encimera hay varios frascos etiquetados ('frasco_*.txt'),
+cada uno con una clave distinta. Solo una es la correcta.
+
+Lee 'metodo_revelado.txt': te explica cómo separar lo verdadero
+de lo falso usando la olla reveladora ('olla.sh').
+══════════════════════════════════════════════════════════
+DOC
+
+cat > "$M/cocina/metodo_revelado.txt" << 'DOC'
+MÉTODO DE LA COCINERA PARA DISTINGUIR LO FALSO DE LO REAL
+═════════════════════════════════════════════════════════
+
+La tinta falsa se disuelve con el vapor de la olla reveladora.
+Pero la olla solo reacciona EN LA ENTRADA de la mansión.
+
+PASOS:
+
+  1) Por seguridad, haz primero una COPIA de las notas:
+        cp -r notas_revueltas notas_respaldo
+
+  2) Lleva las notas y la olla a la entrada (MOVER, no copiar):
+        mv notas_revueltas ../entrada/
+        mv olla.sh ../entrada/
+
+  3) Ve a la entrada y hierve la olla allí:
+        cd ../entrada
+        bash olla.sh
+
+El vapor borrará las notas falsas. Solo quedarán las dos
+notas auténticas: una dirá en QUÉ frasco está la contraseña,
+y otra dirá A QUÉ HABITACIÓN ir después.
+DOC
+
+# Notas revueltas: falsas + 2 reales (nombres disfrazados)
+cat > "$M/cocina/notas_revueltas/recorte_periodico.txt" << 'DOC'
+[Recorte de periódico, amarillento]
+"...el sobrino, Victor Gentoo, acumulaba deudas de juego..."
+La contraseña está en la etiqueta de un frasco. (Recorte sin firmar.)
+DOC
+
+cat > "$M/cocina/notas_revueltas/carta_anonima.txt" << 'DOC'
+[Carta anónima, letra temblorosa]
+Yo que tú miraría el frasco del azúcar. La contraseña está en
+la etiqueta de un frasco, créeme.
+DOC
+
+cat > "$M/cocina/notas_revueltas/grabacion_transcrita.txt" << 'DOC'
+[Transcripción de una grabación de mala calidad]
+"...no busques en la cocina... ve directo al desván..."
+La contraseña está en la etiqueta de un frasco. (Voz no identificada.)
+DOC
+
+cat > "$M/cocina/notas_revueltas/nota_arrugada.txt" << 'DOC'
+[Papel arrugado en el fondo de un cajón]
+El frasco de la pimienta lo dice todo. La contraseña está en la
+etiqueta de un frasco.
+DOC
+
+cat > "$M/cocina/notas_revueltas/factura_vinos.txt" << 'DOC'
+[Factura de una bodega]
+12 botellas de Burdeos, 1998. Pagado en efectivo.
+(Nada que ver con el caso, pero alguien la dejó aquí para confundir.)
+DOC
+
+cat > "$M/cocina/notas_revueltas/fragmento_de_carta.txt" << 'DOC'
+[Una carta rota por la mitad]
+Yo fregué esa taza az... 
+Antes vi lo que llevaba...
+Que conste: Está en la etiqueta del frasco de arsé...
+
+                                            — Ros...
+DOC
+
+cat > "$M/cocina/notas_revueltas/itinerario.txt" << 'DOC'
+[Nota auténtica del mayordomo]
+Cuando tengas la clave de la cocina, no pierdas tiempo:
+el siguiente paso está en el LABORATORIO, dentro del salón principal.
+
+    cd ../salon_principal/laboratorio
+DOC
+
+# La olla reveladora: borra las notas falsas en la entrada
+cat > "$M/cocina/olla.sh" << 'OLLA'
+#!/bin/bash
+# Olla reveladora. Solo reacciona en la ENTRADA, con las notas presentes.
+
+if [ ! -f "bienvenida.txt" ] || [ ! -f ".sobre_sellado.txt" ]; then
+  echo ""
+  echo "  El líquido no reacciona. La olla solo hierve en la ENTRADA."
+  echo "  Lleva la olla y las notas a la entrada y vuelve a intentarlo."
+  echo ""
+  exit 1
+fi
+
+if [ ! -d "notas_revueltas" ]; then
+  echo ""
+  echo "  No hay nada que revelar. Trae aquí la carpeta 'notas_revueltas'."
+  echo ""
+  exit 1
+fi
+
+echo ""
+echo "  El vapor sube y la tinta falsa se disuelve..."
+
+cd notas_revueltas || exit 1
+rm -f recorte_periodico.txt
+rm -f carta_anonima.txt
+rm -f grabacion_transcrita.txt
+rm -f nota_arrugada.txt
+rm -f factura_vinos.txt
+
+echo "  Las notas falsas se han borrado. Quedan las auténticas:"
+echo ""
+ls -1
+echo ""
+echo "  Léelas: una te dice EN QUÉ FRASCO está la contraseña,"
+echo "  y otra A QUÉ HABITACIÓN ir después."
+echo ""
+OLLA
+
+chmod 644 "$M/cocina/olla.sh"
+
+# Frascos etiquetados: solo el de arsénico tiene la clave correcta
+cat > "$M/cocina/frasco_sal.txt" << 'DOC'
+FRASCO — SAL MARINA
+Perfecta para condimentar
+Etiqueta inferior, clave grabada:  SAL_KITCHEN
+DOC
+
+cat > "$M/cocina/frasco_azucar.txt" << 'DOC'
+FRASCO — AZÚCAR GLAS
+Demasiado dulce
+Etiqueta inferior, clave grabada:  AZUCAR_KITCHEN
+DOC
+
+cat > "$M/cocina/frasco_pimienta.txt" << 'DOC'
+FRASCO — PIMIENTA NEGRA
+Pica mucho
+Etiqueta inferior, clave grabada:  PEPPER_KITCHEN
+DOC
+
+cat > "$M/cocina/frasco_arsen.txt" << 'DOC'
+FRASCO — "POLVO BLANCO" (sin etiqueta comercial)
+Huele a almendras amargas.
+Etiqueta inferior, clave grabada:  ARSENIC_KITCHEN
+DOC
+
+cat > "$M/cocina/taza_azul.txt" << 'DOC'
+La taza de porcelana azul del Lord. Está lavada. Demasiado lavada.
+DOC
+
+cat > "$M/cocina/calendario.txt" << 'DOC'
+Calendario de octubre. El día 12 tiene un círculo rojo y, escrito
+a mano: "22:30 — té". La caligrafía no es la del Lord.
+DOC
+
+# ============================================================
+# CAPÍTULO 6 — EL SALÓN PRINCIPAL  (objetivo: combinar todo)
+# ============================================================
+
+cat > "$M/salon_principal/cuaderno_detective.txt" << 'DOC'
+══════════════════════════════════════════════════════════
+ CUADERNO DEL DETECTIVE — El Salón Principal
+ Objetivo: combinar todo lo aprendido
+══════════════════════════════════════════════════════════
+
+COMANDOS DE ESTE CAPÍTULO:
+
+  cp origen destino        Reúne aquí las pruebas.
+  cat a b c                Une varios archivos en orden.
+  comando | comando        Tubería: pasa una salida a otro programa.
+  chmod +x archivo         Da permiso de ejecución.
+  ./archivo                Ejecuta un programa de esta carpeta.
+
+──────────────────────────────────────────────────────────
+INVESTIGACIÓN:
+
+Todos los implicados están reunidos aquí, con un agente de
+policía. Lee 'nota_oficial.txt': el agente solo deducirá al
+culpable si le entregas TODAS las pruebas, unidas en el orden
+correcto, y le das permiso para revisarlas.
+══════════════════════════════════════════════════════════
+DOC
+
+cat > "$M/salon_principal/nota_oficial.txt" << 'DOC'
+══════════════════════════════════════════════════════════
+ AGENTE DE POLICÍA — INSTRUCCIONES PARA EL DETECTIVE
+══════════════════════════════════════════════════════════
+
+Detective Kernel: tráigame todas las pruebas del caso y las
+deduciré delante de los sospechosos. Necesito CINCO documentos:
+
+  (1) El sobre sellado de la ENTRADA
+  (2) El diario de la BIBLIOTECA
+  (3) El frasco correcto de la COCINA
+  (4) Las huellas del LABORATORIO
+  (5) La confesión del ESTUDIO
+
+PASO 1 — Reúnalas aquí, en el salón, con cp. Por ejemplo:
+  cp ../entrada/.sobre_sellado.txt .
+
+PASO 2 — Únalas con una TUBERÍA, pero en MI orden de deducción:
+primero la confesión (5), luego el sobre (1), el diario (2),
+el frasco (3) y, por último, las huellas (4). Es decir: 5-1-2-3-4.
+
+  cat archivo5.txt archivo1.txt ... archivoN.txt | ./inspector.sh
+
+PASO 3 — Deme permiso para revisarlas (sin permiso no puedo
+ejecutar mi análisis):
+
+  chmod +x inspector.sh
+
+Con las pruebas en ese orden y el permiso dado, anunciaré al
+culpable y le daré el código del caso cerrado.
+══════════════════════════════════════════════════════════
+DOC
+
+# El inspector: valida el orden 5-1-2-3-4 y revela el desenlace
+cat > "$M/salon_principal/inspector.sh" << 'INSPECTOR'
+#!/bin/bash
+# Agente de policía. Lee las pruebas unidas por la entrada estándar.
+
+if [ -n "$1" ] && [ -f "$1" ]; then
+  DATA="$(cat "$1")"
+else
+  DATA="$(cat)"
+fi
+
+ORDEN="$(printf '%s\n' "$DATA" | grep -oE 'EVIDENCIA E[1-5]' | sed 's/EVIDENCIA //' | tr '\n' ' ' | sed 's/ *$//')"
+ESPERADO="E5 E1 E2 E3 E4"
+
+if [ -z "$ORDEN" ]; then
+  echo ""
+  echo "  Agente: no me has dado ninguna prueba que revisar."
+  echo "  Únelas con cat y pásamelas por una tubería."
+  echo ""
+  exit 1
+fi
+
+if [ "$ORDEN" != "$ESPERADO" ]; then
+  echo ""
+  echo "  Agente: estas pruebas no cuentan una historia coherente."
+  echo "  Recibí el orden: $ORDEN"
+  echo "  Necesito el orden 5-1-2-3-4. Vuelve a unirlas."
+  echo ""
+  exit 1
+fi
+
+echo ""
+echo "  El agente extiende las cinco pruebas sobre la mesa."
+echo "  Las lee en orden, una tras otra, y levanta la vista."
+echo ""
+echo "  -- DEDUCCION FINAL -------------------------------------"
+echo "   Movil:        2.000.000 de la poliza de vida."
+echo "   Metodo:       digitalina (dedalera) disuelta en el te."
+echo "   Oportunidad:  fue la unica que preparo el te esa noche."
+echo ""
+echo "   CULPABLE:     Lady Isolde Torvald"
+echo "  -------------------------------------------------------"
+echo ""
+echo "  Contrasena final (capitulo 6, introducela en la web):"
+echo "       ISOLDE_CULPABLE"
+echo ""
+echo "  Codigo de caso cerrado:"
+echo "       CASO_RESUELTO_TORVALD_2024"
+echo ""
+INSPECTOR
+
+chmod 644 "$M/salon_principal/inspector.sh"
+
+cat > "$M/salon_principal/candelabro.txt" << 'DOC'
+Candelabro de plata para cinco velas. Tres consumidas, dos casi nuevas.
+Cinco personas. Tres esperaron. Dos se marcharon pronto.
+DOC
+
+cat > "$M/salon_principal/retrato_isolde.txt" << 'DOC'
+Retrato de Lady Isolde Torvald, 2019. Guantes blancos de jardinería
+y, en el cabello, flores de dedalera morada. Sonrisa calculada.
+DOC
+
+# ============================================================
+# CAPÍTULO 4 — EL LABORATORIO  (objetivo: nano y chmod +x)
+# ============================================================
+
+cat > "$M/salon_principal/laboratorio/cuaderno_detective.txt" << 'DOC'
+══════════════════════════════════════════════════════════
+ CUADERNO DEL DETECTIVE — El Laboratorio
+ Objetivo: editar con nano y dar permisos con chmod
+══════════════════════════════════════════════════════════
+
+COMANDOS DE ESTE CAPÍTULO:
+
+  nano archivo.txt     Edita un archivo en el terminal.
+                       Guardar: Ctrl+O y Enter.  Salir: Ctrl+X.
+  ls -la               Muestra los permisos (la x = ejecutable).
+  chmod +x archivo.sh  Da permiso de ejecución.
+  ./archivo.sh         Ejecuta un programa de la carpeta actual.
+
+──────────────────────────────────────────────────────────
+INVESTIGACIÓN:
+
+Aquí hay una máquina reveladora de huellas: 'maquina_huellas.sh'.
+Está apagada y necesita una placa preparada.
+
+  PASO 1 — Prepara la placa con nano. Abre 'placa.txt' y deja
+           la línea de estado EXACTAMENTE así:
+               ESTADO: LISTA
+           (ahora pone EN_BLANCO; cámbiala y guarda con Ctrl+O).
+
+  PASO 2 — Enciende la máquina dándole permiso de ejecución:
+               chmod +x maquina_huellas.sh
+
+  PASO 3 — Ejecútala:
+               ./maquina_huellas.sh
+
+La máquina generará un informe con los nombres de quienes
+estuvieron aquí y la contraseña del capítulo. Esa contraseña
+es, además, EL LIBRO que abre el muro de la biblioteca.
+══════════════════════════════════════════════════════════
+DOC
+
+cat > "$M/salon_principal/laboratorio/placa.txt" << 'DOC'
+PLACA DE REVELADO
+MUESTRA: residuos de la taza azul
+ESTADO: EN_BLANCO
+DOC
+
+# La máquina: requiere placa LISTA, luego genera el informe con DIGITALINA
+cat > "$M/salon_principal/laboratorio/maquina_huellas.sh" << 'MAQUINA'
+#!/bin/bash
+# Máquina reveladora de huellas dactilares.
+
+if [ ! -f "placa.txt" ]; then
+  echo "  No encuentro la placa. Debes ejecutarme en el laboratorio."
+  exit 1
+fi
+
+if ! grep -q '^ESTADO: LISTA$' placa.txt; then
+  echo ""
+  echo "  La máquina zumba y se apaga: la placa no está preparada."
+  echo "  Edita 'placa.txt' con nano y deja la línea:  ESTADO: LISTA"
+  echo ""
+  exit 1
+fi
+
+echo ""
+echo "  La placa encaja. La máquina revela las huellas latentes..."
+echo ""
+
+cat > huellas_reveladas.txt << 'HDOC'
+INFORME DE HUELLAS — LABORATORIO TORVALD
+═════════════════════════════════════════
+Superficie analizada: taza de porcelana azul y frasco azul.
+
+Huellas identificadas:
+  - Thomas Bash (mayordomo) ....... en el asa de la taza (servicio)
+  - Edmund Torvald (victima) ...... en el borde de la taza
+  - Isolde Torvald (esposa) ....... en el FRASCO del veneno
+
+Sustancia detectada: DIGITALINA (glucosido de la dedalera).
+Estable a 90 grados: no se destruye al preparar el te.
+
+Contrasena del capitulo 4: DIGITALINA
+
+NOTA: 'DIGITALINA' es tambien EL LIBRO que pide el muro de la
+biblioteca. Vuelve alli y ejecuta:  bash muro_libros.sh DIGITALINA
+HDOC
+
+echo "  Informe generado:  huellas_reveladas.txt"
+echo "  Léelo con:  cat huellas_reveladas.txt"
+echo ""
+MAQUINA
+
+chmod 644 "$M/salon_principal/laboratorio/maquina_huellas.sh"
+
+cat > "$M/salon_principal/laboratorio/microscopio.txt" << 'DOC'
+Microscopio de latón. El polvo termina de golpe en los oculares:
+alguien lo usó hace poco.
+DOC
+
+cat > "$M/salon_principal/laboratorio/manual_botanica.txt" << 'DOC'
+Manual de Botánica, abierto en Digitalis purpurea (dedalera).
+Subrayado: "Glucósido cardíaco. Margen estrecho entre dosis y muerte."
+La letra del margen no es la del Lord.
+DOC
+
+echo "  Capítulos disponibles: biblioteca, cocina, salón principal."
+echo "  Empieza por la biblioteca:  cd ../biblioteca"
+echo ""
+PALANCA
+
+chmod 644 mansion/entrada/palanca.sh
 
 # ============================================================
 # MENSAJE FINAL
 # ============================================================
 echo ""
-echo -e "${GREEN}  ✓ Habitaciones creadas${NC}"
-echo -e "${GREEN}  ✓ Archivos de evidencias generados${NC}"
-echo -e "${GREEN}  ✓ Pistas ocultas instaladas${NC}"
-echo -e "${GREEN}  ✓ Permisos configurados${NC}"
+echo -e "${GREEN}  ✓ Entrada de la mansión preparada${NC}"
+echo -e "${GREEN}  ✓ Palanca instalada (esperando la contraseña)${NC}"
 echo ""
 echo -e "${GOLD}╔══════════════════════════════════════════════════════════╗${NC}"
-echo -e "${GOLD}║          LA MANSIÓN TORVALD ESTÁ LISTA                   ║${NC}"
+echo -e "${GOLD}║             EL PORTÓN TORVALD ESTÁ ABIERTO               ║${NC}"
 echo -e "${GOLD}╚══════════════════════════════════════════════════════════╝${NC}"
 echo ""
 echo -e "  Empieza tu investigación:"
@@ -1350,6 +871,6 @@ echo ""
 echo -e "    ${CYAN}cd mansion/entrada${NC}"
 echo -e "    ${CYAN}cat bienvenida.txt${NC}"
 echo ""
-echo -e "  Recuerda: en cada habitación hay un ${GOLD}pista.txt${NC}"
-echo -e "  que te explica exactamente qué comandos usar."
+echo -e "  En cada habitación hay un ${GOLD}cuaderno_detective.txt${NC}"
+echo -e "  que te explica qué comandos usar."
 echo ""
