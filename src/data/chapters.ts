@@ -120,7 +120,7 @@ export const chapters: Chapter[] = [
     commands: ["cp", "cat", "cmd | cmd | cmd", "chmod +x", "./script.sh"],
     story:
       "En el salón principal está el <strong>agente de policía</strong> con todos los sospechosos. Solo deducirá al culpable si le entregas <strong>las cinco pruebas</strong>: el sobre de la entrada, el diario, el frasco correcto, las huellas del laboratorio y la confesión del estudio.<br><br>Reúnelas aquí con <code>cp</code>, <strong>únelas con una tubería</strong> hacia el agente en su orden de deducción y dale permiso para revisarlas con <code>chmod +x</code>. Anunciará al culpable y te dará la contraseña final.",
-    hint: 'Une las pruebas en orden y pásalas por una tubería: <code>cat archivo_1.txt archivo_2.txt ... archivo_N.txt huellas_reveladas.txt | ./inspector.sh</code>. Recuerda darle permisos con <code>chmod +x inspector.sh</code>.',
+    hint: "Une las pruebas en orden y pásalas por una tubería: <code>cat archivo_1.txt archivo_2.txt ... archivo_N.txt huellas_reveladas.txt | ./inspector.sh</code>. Recuerda darle permisos con <code>chmod +x inspector.sh</code>.",
   },
 ];
 
@@ -128,7 +128,8 @@ export const chapters: Chapter[] = [
  *  command string used in each chapter's `commands` array. */
 export const COMMAND_INFO: Record<string, string> = {
   pwd: "«print working directory». Muestra la ruta de la carpeta en la que te encuentras ahora mismo.",
-  whoami: "Muestra el nombre del usuario con el que estás operando en el sistema.",
+  whoami:
+    "Muestra el nombre del usuario con el que estás operando en el sistema.",
   ls: "Lista los archivos y carpetas visibles del directorio actual.",
   "ls -la":
     "Lista TODO en formato largo: incluye los archivos ocultos (los que empiezan por un punto) y sus permisos.",
@@ -142,7 +143,8 @@ export const COMMAND_INFO: Record<string, string> = {
   touch: "Crea un archivo vacío (o actualiza la fecha de uno que ya existe).",
   mkdir: "«make directory». Crea una carpeta nueva.",
   cp: "Copia un archivo o carpeta a otro lugar.",
-  "cp -r": "Copia una carpeta entera con todo su contenido (útil para hacer copias de seguridad).",
+  "cp -r":
+    "Copia una carpeta entera con todo su contenido (útil para hacer copias de seguridad).",
   mv: "Mueve un archivo o carpeta, o lo renombra.",
   "bash script.sh":
     "Ejecuta un guion (script) de shell. Puedes pasarle datos, como una contraseña: bash script.sh CLAVE.",
@@ -171,4 +173,3 @@ export const COMMAND_INFO: Record<string, string> = {
     "Lee un archivo, se queda con su parte final (tail) y filtra ahí con grep.",
   exit: "Cierra la sesión del terminal cuando has terminado tu trabajo.",
 };
-

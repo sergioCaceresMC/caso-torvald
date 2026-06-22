@@ -1,6 +1,6 @@
 ---
-import type { Chapter } from '../data/chapters';
-import { COMMAND_INFO } from '../data/chapters';
+import type { Chapter } from "../data/chapters";
+import { COMMAND_INFO } from "../data/chapters";
 
 type Props = Chapter;
 
@@ -21,7 +21,7 @@ const {
 ---
 
 <article
-  class:list={['chapter-card', isFirst ? 'unlocked' : 'locked']}
+  class:list={["chapter-card", isFirst ? "unlocked" : "locked"]}
   id={`chapter-${chapter}`}
   data-chapter={chapter}
 >
@@ -50,7 +50,9 @@ const {
           onerror="this.closest('.evidence').classList.add('img-failed')"
         />
         <span class="evidence-noimg" aria-hidden="true">{title}</span>
-        <span class="evidence-stamp">Exp. Nº {String(chapter).padStart(3, '0')}</span>
+        <span class="evidence-stamp"
+          >Exp. Nº {String(chapter).padStart(3, "0")}</span
+        >
         <span class="status-chip lock-chip">Sellado</span>
         <span class="status-chip unlock-chip">Abierto</span>
       </div>
@@ -78,15 +80,19 @@ const {
       <div class="commands-section">
         <h3>Comandos de este capítulo</h3>
         <div class="cmd-tags">
-          {commands.map(cmd => (
-            <button
-              type="button"
-              class="cmd-tag"
-              data-explain={COMMAND_INFO[cmd] ?? 'Comando del terminal de Linux.'}
-            >
-              {cmd}
-            </button>
-          ))}
+          {
+            commands.map((cmd) => (
+              <button
+                type="button"
+                class="cmd-tag"
+                data-explain={
+                  COMMAND_INFO[cmd] ?? "Comando del terminal de Linux."
+                }
+              >
+                {cmd}
+              </button>
+            ))
+          }
         </div>
         <p class="cmd-explain" aria-live="polite">
           Pulsa un comando para ver qué hace.
@@ -134,8 +140,14 @@ const {
   }
 
   @keyframes cardIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* ── Left: evidence photo ── */
@@ -174,7 +186,9 @@ const {
   .photo-back {
     z-index: 1;
     filter: sepia(0.45) brightness(0.9);
-    transition: transform 0.45s ease, box-shadow 0.45s ease;
+    transition:
+      transform 0.45s ease,
+      box-shadow 0.45s ease;
   }
   .photo-front {
     z-index: 2;
@@ -194,7 +208,7 @@ const {
   .chapter-card:hover .photo-front {
     transform: rotate(-2deg);
   }*/
-  
+
   .evidence:hover .photo-back {
     transform: rotate(6.5deg) translate(4%, 5%);
     box-shadow: var(--lift);
@@ -205,7 +219,9 @@ const {
   .chapter-card.unlocked:hover .photo-front .evidence-img {
     filter: sepia(0) contrast(1) brightness(1);
   }
-  .chapter-card.locked .evidence-img { filter: grayscale(0.85) brightness(0.95); }
+  .chapter-card.locked .evidence-img {
+    filter: grayscale(0.85) brightness(0.95);
+  }
 
   /* Fallback if the photo fails to load (no broken image, no emoji) */
   .evidence-noimg {
@@ -221,10 +237,18 @@ const {
     color: var(--ink-muted);
     background:
       var(--paper-grain),
-      repeating-linear-gradient(45deg, var(--card-2) 0 14px, var(--paper-2) 14px 28px);
+      repeating-linear-gradient(
+        45deg,
+        var(--card-2) 0 14px,
+        var(--paper-2) 14px 28px
+      );
   }
-  .evidence.img-failed .evidence-img { display: none; }
-  .evidence.img-failed .evidence-noimg { display: flex; }
+  .evidence.img-failed .evidence-img {
+    display: none;
+  }
+  .evidence.img-failed .evidence-noimg {
+    display: flex;
+  }
 
   /* Red case-file stamp */
   .evidence-stamp {
@@ -253,10 +277,21 @@ const {
     letter-spacing: 0.04em;
     padding: 0.2rem 0.6rem;
   }
-  .lock-chip { background: rgba(26, 24, 19, 0.72); color: #fff; }
-  .unlock-chip { display: none; background: var(--amber-deep); color: var(--ink); }
-  .chapter-card.unlocked .lock-chip { display: none; }
-  .chapter-card.unlocked .unlock-chip { display: block; }
+  .lock-chip {
+    background: rgba(26, 24, 19, 0.72);
+    color: #fff;
+  }
+  .unlock-chip {
+    display: none;
+    background: var(--amber-deep);
+    color: var(--ink);
+  }
+  .chapter-card.unlocked .lock-chip {
+    display: none;
+  }
+  .chapter-card.unlocked .unlock-chip {
+    display: block;
+  }
 
   .evidence-caption {
     font-family: var(--font-mono);
@@ -275,7 +310,9 @@ const {
     padding: 1.6rem 1.7rem;
   }
 
-  .case-head { margin-bottom: 1.1rem; }
+  .case-head {
+    margin-bottom: 1.1rem;
+  }
 
   /* Chapter NUMBER — previous yellow background, black text */
   .chapter-pill {
@@ -290,7 +327,11 @@ const {
     padding: 0.24rem 0.8rem;
   }
 
-  .chapter-title { margin: 0; font-size: 1.7rem; line-height: 1.2; }
+  .chapter-title {
+    margin: 0;
+    font-size: 1.7rem;
+    line-height: 1.2;
+  }
 
   /* Chapter NAME — orange (amber) background, black text */
   .title-mark {
@@ -322,7 +363,9 @@ const {
     font-style: italic;
     color: var(--ink-muted);
   }
-  .chapter-card.unlocked .locked-caption { display: none; }
+  .chapter-card.unlocked .locked-caption {
+    display: none;
+  }
 
   /* Body appears once unlocked, styled as a handwritten letter on ruled paper */
   .case-body {
@@ -346,7 +389,9 @@ const {
     box-shadow: var(--lift-sm);
     padding: 1.6rem 1.6rem 1.6rem 3rem;
   }
-  .chapter-card.unlocked .case-body { display: block; }
+  .chapter-card.unlocked .case-body {
+    display: block;
+  }
 
   /* Handwritten-style story */
   .story {
@@ -356,10 +401,14 @@ const {
     margin: 0 0 1.7rem;
     line-height: 1.85;
   }
-  .story :global(strong) { font-style: italic; }
+  .story :global(strong) {
+    font-style: italic;
+  }
 
   /* ── Commands ── */
-  .commands-section { margin-bottom: 1.4rem; }
+  .commands-section {
+    margin-bottom: 1.4rem;
+  }
   .commands-section h3 {
     font-family: var(--font-mono);
     font-size: 0.7rem;
@@ -369,7 +418,11 @@ const {
     color: var(--ink-muted);
     margin-bottom: 0.7rem;
   }
-  .cmd-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .cmd-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
   .cmd-tag {
     font-family: var(--font-mono);
     font-size: 0.8rem;
@@ -378,7 +431,10 @@ const {
     color: var(--amber-dark);
     padding: 0.24rem 0.6rem;
     cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease,
+      color 0.2s ease;
   }
   .cmd-tag:hover {
     transform: translateY(-2px);
@@ -428,9 +484,20 @@ const {
   }
 
   /* ── Password — the ONLY rounded area ── */
-  .pw-section { border-top: 1px dashed var(--border-strong); padding-top: 1.3rem; }
-  .pw-label { font-size: 0.9rem; color: var(--ink-muted); margin-bottom: 0.65rem; }
-  .pw-label em { color: var(--ink); font-style: normal; font-weight: 700; }
+  .pw-section {
+    border-top: 1px dashed var(--border-strong);
+    padding-top: 1.3rem;
+  }
+  .pw-label {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    margin-bottom: 0.65rem;
+  }
+  .pw-label em {
+    color: var(--ink);
+    font-style: normal;
+    font-weight: 700;
+  }
 
   .pw-row {
     display: flex;
@@ -441,7 +508,9 @@ const {
     overflow: hidden;
     transition: box-shadow 0.2s ease;
   }
-  .pw-row:focus-within { box-shadow: var(--lift); }
+  .pw-row:focus-within {
+    box-shadow: var(--lift);
+  }
 
   .pw-input {
     flex: 1;
@@ -461,7 +530,10 @@ const {
     letter-spacing: 0.12em;
     font-size: 0.8rem;
   }
-  .pw-input:disabled { opacity: 0.55; cursor: not-allowed; }
+  .pw-input:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
 
   .pw-btn {
     background: var(--amber);
@@ -476,9 +548,16 @@ const {
     white-space: nowrap;
     transition: background 0.2s ease;
   }
-  .pw-btn:hover:not(:disabled) { background: var(--amber-deep); }
-  .pw-btn:active:not(:disabled) { filter: brightness(0.96); }
-  .pw-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .pw-btn:hover:not(:disabled) {
+    background: var(--amber-deep);
+  }
+  .pw-btn:active:not(:disabled) {
+    filter: brightness(0.96);
+  }
+  .pw-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 
   .pw-feedback {
     margin-top: 0.6rem;
@@ -486,32 +565,62 @@ const {
     min-height: 1.2em;
     font-family: var(--font-mono);
   }
-  .pw-feedback.success { color: var(--success-text); }
-  .pw-feedback.error   { color: var(--error-text); }
+  .pw-feedback.success {
+    color: var(--success-text);
+  }
+  .pw-feedback.error {
+    color: var(--error-text);
+  }
 
   @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20% { transform: translateX(-8px); }
-    40% { transform: translateX(8px); }
-    60% { transform: translateX(-5px); }
-    80% { transform: translateX(4px); }
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(-8px);
+    }
+    40% {
+      transform: translateX(8px);
+    }
+    60% {
+      transform: translateX(-5px);
+    }
+    80% {
+      transform: translateX(4px);
+    }
   }
-  .pw-input.shake { animation: shake 0.5s ease-in-out; }
+  .pw-input.shake {
+    animation: shake 0.5s ease-in-out;
+  }
 
   /* ── Stacked layout on narrow screens ── */
   @media (max-width: 760px) {
-    .chapter-card { height: auto; flex-direction: column; }
+    .chapter-card {
+      height: auto;
+      flex-direction: column;
+    }
     .evidence {
       flex: none;
       border-right: none;
       border-bottom: 1px dashed var(--border-strong);
     }
-    .evidence-photo { aspect-ratio: 16 / 10; flex: none; }
-    .case-content { overflow: visible; }
+    .evidence-photo {
+      aspect-ratio: 16 / 10;
+      flex: none;
+    }
+    .case-content {
+      overflow: visible;
+    }
   }
 
   @media (max-width: 520px) {
-    .pw-row { flex-direction: column; }
-    .pw-btn { border-left: none; border-top: 2px solid var(--amber-deep); }
+    .pw-row {
+      flex-direction: column;
+    }
+    .pw-btn {
+      border-left: none;
+      border-top: 2px solid var(--amber-deep);
+    }
   }
 </style>

@@ -40,7 +40,7 @@ mansion is generated on demand by nested helper scripts that each gate progress:
   **5-1-2-3-4** (matched via `### EVIDENCIA E1..E5` tags); needs `chmod +x`;
   reveals `ISOLDE_CULPABLE` + the final code.
 
-The map (parentheses = generated later):  `entrada → {biblioteca → (estudio),
+The map (parentheses = generated later): `entrada → {biblioteca → (estudio),
 cocina, salon_principal → laboratorio}`. Map order ≠ chapter order: chapters run
 entrada(1) · biblioteca(2) · cocina(3) · laboratorio(4) · estudio(5) · salon(6).
 Clue/evidence files use in-world names (`diario_lord.txt`, `frasco_arsenico.txt`,
@@ -159,6 +159,7 @@ prefer the tokens over hard-coded hex values.
 - `--paper-grain` is an inline SVG noise texture applied to the body and cards.
 
 **House rules** (per the current design direction):
+
 - **Square corners everywhere except the password box.** Only `.pw-row`/inputs
   use `--radius-sm`; the nav dots stay circular as indicators. Everything else
   (cards, photo, tags, hint, stamps, chips) has straight corners.

@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteHeader from '../components/SiteHeader.astro';
-import ChapterCard from '../components/ChapterCard.astro';
-import Certificate from '../components/Certificate.astro';
-import { chapters } from '../data/chapters';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import ChapterCard from "../components/ChapterCard.astro";
+import Certificate from "../components/Certificate.astro";
+import { chapters } from "../data/chapters";
 ---
 
 <BaseLayout>
@@ -11,7 +11,7 @@ import { chapters } from '../data/chapters';
 
   <main class="stage">
     <div class="deck">
-      {chapters.map(ch => <ChapterCard {...ch} />)}
+      {chapters.map((ch) => <ChapterCard {...ch} />)}
       <Certificate />
     </div>
   </main>
@@ -19,7 +19,9 @@ import { chapters } from '../data/chapters';
   <nav class="chapter-nav" aria-label="Navegación entre capítulos">
     <button id="nav-prev" class="nav-btn" type="button">‹ Anterior</button>
     <div class="nav-center">
-      <span id="nav-label" class="nav-label">Capítulo 1 de {chapters.length}</span>
+      <span id="nav-label" class="nav-label"
+        >Capítulo 1 de {chapters.length}</span
+      >
       <div id="nav-dots" class="nav-dots"></div>
     </div>
     <button id="nav-next" class="nav-btn" type="button">Siguiente ›</button>
@@ -27,7 +29,7 @@ import { chapters } from '../data/chapters';
 </BaseLayout>
 
 <script>
-  import '../scripts/escapeRoom';
+  import "../scripts/escapeRoom";
 </script>
 
 <style>
@@ -66,14 +68,20 @@ import { chapters } from '../data/chapters';
     font-size: 0.85rem;
     padding: 0.5rem 1.1rem;
     cursor: pointer;
-    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    transition:
+      border-color 0.2s,
+      background 0.2s,
+      transform 0.15s;
   }
   .nav-btn:hover:not(:disabled) {
     border-color: var(--amber-deep);
     background: var(--amber-soft);
     transform: translateY(-1px);
   }
-  .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
 
   .nav-center {
     display: flex;
@@ -104,9 +112,14 @@ import { chapters } from '../data/chapters';
     background: var(--card);
     padding: 0;
     cursor: pointer;
-    transition: transform 0.2s, background 0.2s, border-color 0.2s;
+    transition:
+      transform 0.2s,
+      background 0.2s,
+      border-color 0.2s;
   }
-  .nav-dot:hover { transform: scale(1.25); }
+  .nav-dot:hover {
+    transform: scale(1.25);
+  }
   .nav-dot.is-active {
     background: var(--amber);
     border-color: var(--amber-deep);
@@ -114,7 +127,9 @@ import { chapters } from '../data/chapters';
   }
   .nav-dot.is-locked {
     background: repeating-linear-gradient(
-      45deg, var(--card) 0 2px, var(--border) 2px 4px
+      45deg,
+      var(--card) 0 2px,
+      var(--border) 2px 4px
     );
   }
   .nav-dot.is-cert {
@@ -128,11 +143,20 @@ import { chapters } from '../data/chapters';
       overflow: visible;
       padding: 1rem;
     }
-    .deck { max-width: 560px; }
-    .chapter-nav { position: sticky; bottom: 0; background: var(--paper); }
+    .deck {
+      max-width: 560px;
+    }
+    .chapter-nav {
+      position: sticky;
+      bottom: 0;
+      background: var(--paper);
+    }
   }
 
   @media (max-width: 520px) {
-    .nav-btn { font-size: 0.78rem; padding: 0.5rem 0.7rem; }
+    .nav-btn {
+      font-size: 0.78rem;
+      padding: 0.5rem 0.7rem;
+    }
   }
 </style>

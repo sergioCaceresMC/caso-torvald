@@ -1,5 +1,5 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 import logo from "../assets/logo.webp";
 
 interface Props {
@@ -11,32 +11,32 @@ interface Props {
 }
 
 const {
-  title = 'El Caso Torvald — Linux Escape Room',
-  description = 'Un escape room para aprender comandos de Linux investigando el asesinato de Lord Edmund Torvald.',
-  bodyClass = '',
+  title = "El Caso Torvald — Linux Escape Room",
+  description = "Un escape room para aprender comandos de Linux investigando el asesinato de Lord Edmund Torvald.",
+  bodyClass = "",
 } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content={description} />
-  <title>{title}</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
 
-  <!-- Poppins (titles) -->
-   
-  <link rel="icon" type="image/svg+xml" href={logo.src} />
-  <link rel="icon" href={logo.src} />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap"
-  />
-</head>
-<body class={bodyClass}>
-  <slot />
-</body>
+    <!-- Poppins (titles) -->
+
+    <link rel="icon" type="image/svg+xml" href={logo.src} />
+    <link rel="icon" href={logo.src} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap"
+    />
+  </head>
+  <body class={bodyClass}>
+    <slot />
+  </body>
 </html>

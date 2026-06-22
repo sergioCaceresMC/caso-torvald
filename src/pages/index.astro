@@ -1,35 +1,35 @@
 ---
-import { Image } from 'astro:assets';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteHeader from '../components/SiteHeader.astro';
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 // Import the setup script as a static URL so it can be downloaded directly.
-import setupScript from '../assets/setup.sh?url';
-import brand from '../assets/brand.webp';
-import { chapters } from '../data/chapters';
+import setupScript from "../assets/setup.sh?url";
+import brand from "../assets/brand.webp";
+import { chapters } from "../data/chapters";
 
 const base = import.meta.env.BASE_URL;
 const casoHref = `${base}/caso`;
 
 const steps = [
   {
-    n: 'I',
-    title: 'Descarga el guion',
-    body: 'Pulsa <strong>Descargar setup.sh</strong> y guarda el archivo en tu equipo. Es un sencillo guion de terminal: puedes abrirlo y leerlo antes de ejecutarlo.',
+    n: "I",
+    title: "Descarga el guion",
+    body: "Pulsa <strong>Descargar setup.sh</strong> y guarda el archivo en tu equipo. Es un sencillo guion de terminal: puedes abrirlo y leerlo antes de ejecutarlo.",
   },
   {
-    n: 'II',
-    title: 'Prepara la mansión',
-    body: 'Ábrelo en tu terminal de Linux y ejecútalo con <br> <code>bash setup.sh</code>. Preparará la <strong>entrada</strong> de la mansión; el resto lo irás abriendo tú desde dentro.',
+    n: "II",
+    title: "Prepara la mansión",
+    body: "Ábrelo en tu terminal de Linux y ejecútalo con <br> <code>bash setup.sh</code>. Preparará la <strong>entrada</strong> de la mansión; el resto lo irás abriendo tú desde dentro.",
   },
   {
-    n: 'III',
-    title: 'Investiga con comandos reales',
-    body: 'Recorre las habitaciones usando comandos de Linux: <code>ls</code>, <code>cat</code>, <code>grep</code> y más. En cada una, el archivo <code>cuaderno_detective.txt</code> te dice qué hacer.',
+    n: "III",
+    title: "Investiga con comandos reales",
+    body: "Recorre las habitaciones usando comandos de Linux: <code>ls</code>, <code>cat</code>, <code>grep</code> y más. En cada una, el archivo <code>cuaderno_detective.txt</code> te dice qué hacer.",
   },
   {
-    n: 'IV',
-    title: 'Desbloquea los capítulos',
-    body: 'Cada habitación esconde una <strong>contraseña</strong>. Encuéntrala con tus comandos e introdúcela en la web para abrir el siguiente capítulo.',
+    n: "IV",
+    title: "Desbloquea los capítulos",
+    body: "Cada habitación esconde una <strong>contraseña</strong>. Encuéntrala con tus comandos e introdúcela en la web para abrir el siguiente capítulo.",
   },
 ];
 ---
@@ -45,18 +45,23 @@ const steps = [
     <section class="hero">
       <div class="hero-text">
         <div class="hero-title-principal">
-        <p class="file-stamp">Expediente Nº 001 — Confidencial</p>
-        <h1 class="hero-title">
-          <span class="title-mark">El Caso Torvald</span>
-        </h1>
+          <p class="file-stamp">Expediente Nº 001 — Confidencial</p>
+          <h1 class="hero-title">
+            <span class="title-mark">El Caso Torvald</span>
+          </h1>
         </div>
-        <p class="hero-kicker">Un escape room para aprender la terminal de Linux</p>
+        <p class="hero-kicker">
+          Un escape room para aprender la terminal de Linux
+        </p>
 
         <p class="hero-lede">
           Son las 23:47 del 13 de octubre. Lord Edmund Torvald, millonario y
-          excéntrico coleccionista, ha aparecido muerto en su estudio. La policía
-          está desconcertada. Tú eres el <strong>Detective Marcos Kernel</strong>, y
-          solo tienes una herramienta para resolver el caso: <strong>la terminal</strong>.
+          excéntrico coleccionista, ha aparecido muerto en su estudio. La
+          policía está desconcertada. Tú eres el <strong
+            >Detective Marcos Kernel</strong
+          >, y solo tienes una herramienta para resolver el caso: <strong
+            >la terminal</strong
+          >.
         </p>
 
         <p class="hero-lede">
@@ -67,38 +72,50 @@ const steps = [
         </p>
 
         <div class="cta-row">
-          <a class="btn btn-primary" href={casoHref}>Comenzar la investigación</a>
+          <a class="btn btn-primary" href={casoHref}
+            >Comenzar la investigación</a
+          >
           <a class="btn btn-secondary" href={setupScript} download="setup.sh">
             <span class="btn-arrow" aria-hidden="true">↓</span> Descargar setup.sh
           </a>
         </div>
 
         <p class="cta-note">
-          Sin registros ni instalaciones: el guion solo crea archivos de texto en
-          una carpeta. Funciona en Linux, macOS o Windows con WSL.
+          Sin registros ni instalaciones: el guion solo crea archivos de texto
+          en una carpeta. Funciona en Linux, macOS o Windows con WSL.
         </p>
       </div>
 
       <figure class="hero-figure">
-        <Image src={brand} alt="La mansión Torvald, escenario del caso" class="hero-img" />
+        <Image
+          src={brand}
+          alt="La mansión Torvald, escenario del caso"
+          class="hero-img"
+        />
         <span class="hero-stamp">Prueba A</span>
-        <figcaption class="hero-caption">Mansión Torvald - escena del crimen</figcaption>
+        <figcaption class="hero-caption">
+          Mansión Torvald - escena del crimen
+        </figcaption>
       </figure>
     </section>
 
     <!-- ── How it works ── -->
     <section class="block">
-      <h2 class="block-title"><span class="block-mark">¿Cómo funciona?</span></h2>
+      <h2 class="block-title">
+        <span class="block-mark">¿Cómo funciona?</span>
+      </h2>
       <ol class="steps">
-        {steps.map(step => (
-          <li class="step">
-            <span class="step-num">{step.n}</span>
-            <div class="step-text">
-              <h3 class="step-title">{step.title}</h3>
-              <p set:html={step.body} />
-            </div>
-          </li>
-        ))}
+        {
+          steps.map((step) => (
+            <li class="step">
+              <span class="step-num">{step.n}</span>
+              <div class="step-text">
+                <h3 class="step-title">{step.title}</h3>
+                <p set:html={step.body} />
+              </div>
+            </li>
+          ))
+        }
       </ol>
     </section>
 
@@ -110,22 +127,35 @@ const steps = [
         <div class="install-reqs">
           <h3 class="reqs-title">Requisitos</h3>
           <ul class="reqs-list">
-            <li>Una terminal con <code>bash</code> (Linux, macOS o Windows + WSL).</li>
-            <li>El navegador, abierto en esta web, para introducir las contraseñas.</li>
-            <li>Nada más: el guion no instala paquetes ni modifica tu sistema.</li>
+            <li>
+              Una terminal con <code>bash</code> (Linux, macOS o Windows + WSL).
+            </li>
+            <li>
+              El navegador, abierto en esta web, para introducir las
+              contraseñas.
+            </li>
+            <li>
+              Nada más: el guion no instala paquetes ni modifica tu sistema.
+            </li>
           </ul>
 
-          <a class="btn btn-secondary install-dl" href={setupScript} download="setup.sh">
+          <a
+            class="btn btn-secondary install-dl"
+            href={setupScript}
+            download="setup.sh"
+          >
             <span class="btn-arrow" aria-hidden="true">↓</span> Descargar setup.sh
           </a>
         </div>
 
         <div class="terminal" aria-label="Comandos de instalación">
           <div class="terminal-bar">
-            <span class="tb-dot"></span><span class="tb-dot"></span><span class="tb-dot"></span>
+            <span class="tb-dot"></span><span class="tb-dot"></span><span
+              class="tb-dot"></span>
             <span class="tb-title">kernel@torvald: ~</span>
           </div>
-          <pre class="terminal-body"><code><span class="c-comment"># 1. Ejecuta el guion que prepara la mansión</span>
+          <pre
+            class="terminal-body"><code><span class="c-comment"># 1. Ejecuta el guion que prepara la mansión</span>
 <span class="c-prompt">$</span> bash setup.sh
 
 <span class="c-comment"># 2. Entra en la primera habitación</span>
@@ -138,7 +168,9 @@ const steps = [
 
       <p class="install-foot">
         ¿Ya tienes la mansión montada? Vuelve a la web e introduce la contraseña
-        de cada habitación para desbloquear los <strong>{chapters.length} capítulos</strong>.
+        de cada habitación para desbloquear los <strong
+          >{chapters.length} capítulos</strong
+        >.
       </p>
     </section>
 
@@ -152,12 +184,14 @@ const steps = [
 
   <footer class="home-foot">
     <p>El Caso Torvald · Escape room para aprender la terminal de Linux.</p>
-    
+
     <a href="http://proyecto-mitha.org/" class="hov mitha-link">
       Un proyecto en colaboración con <span class="mitha">MïTHA</span>
     </a>
-    <br>
-    <a href="https://sergiocaceresmc.github.io/portfolio/" class="hov"><p>Creado por Sergio M. Cáceres.</p></a>
+    <br />
+    <a href="https://sergiocaceresmc.github.io/portfolio/" class="hov"
+      ><p>Creado por Sergio M. Cáceres.</p></a
+    >
   </footer>
 </BaseLayout>
 
@@ -212,7 +246,10 @@ const steps = [
     transform: rotate(-1.2deg);
     margin-bottom: 1.4rem;
   }
-  .hero-title { font-size: clamp(2rem, 5vw, 3rem); margin: 0; }
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 0;
+  }
   .title-mark {
     display: inline-block;
     background: var(--amber);
@@ -251,7 +288,9 @@ const steps = [
     transform: rotate(1.2deg);
     transition: transform 0.35s ease;
   }
-  .hero-figure:hover { transform: rotate(0); }
+  .hero-figure:hover {
+    transform: rotate(0);
+  }
   .hero-img {
     display: block;
     width: 100%;
@@ -260,7 +299,9 @@ const steps = [
     filter: sepia(0.28) contrast(1.02) brightness(0.98);
     transition: filter 0.5s ease;
   }
-  .hero-figure:hover .hero-img { filter: sepia(0) contrast(1) brightness(1); }
+  .hero-figure:hover .hero-img {
+    filter: sepia(0) contrast(1) brightness(1);
+  }
   .hero-stamp {
     position: absolute;
     top: 1.1rem;
@@ -302,16 +343,31 @@ const steps = [
     text-decoration: none;
     cursor: pointer;
     border: 2px solid var(--amber-deep);
-    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease,
+      color 0.2s ease;
   }
-  .btn-primary { background: var(--amber); color: var(--ink); }
-  .btn-primary:hover { background: var(--amber-deep); transform: translateY(-2px); }
-  .btn-secondary { background: var(--card); color: var(--ink); }
+  .btn-primary {
+    background: var(--amber);
+    color: var(--ink);
+  }
+  .btn-primary:hover {
+    background: var(--amber-deep);
+    transform: translateY(-2px);
+  }
+  .btn-secondary {
+    background: var(--card);
+    color: var(--ink);
+  }
   .btn-secondary:hover {
     background: var(--amber-soft);
     transform: translateY(-2px);
   }
-  .btn-arrow { font-family: var(--font-mono); font-weight: 700; }
+  .btn-arrow {
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
 
   .cta-note {
     margin-top: 1.2rem;
@@ -321,8 +377,13 @@ const steps = [
   }
 
   /* ── Generic content block ── */
-  .block { padding: 2.8rem 0; border-bottom: 1px dashed var(--border-strong); }
-  .block-title { font-size: 1.7rem; }
+  .block {
+    padding: 2.8rem 0;
+    border-bottom: 1px dashed var(--border-strong);
+  }
+  .block-title {
+    font-size: 1.7rem;
+  }
   .block-mark {
     display: inline-block;
     background: var(--yellow);
@@ -347,9 +408,14 @@ const steps = [
     background-image: var(--paper-grain);
     border: 1px solid var(--border);
     padding: 1.2rem 1.3rem;
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    transition:
+      border-color 0.2s ease,
+      transform 0.2s ease;
   }
-  .step:hover { border-color: var(--amber-deep); transform: translateY(-2px); }
+  .step:hover {
+    border-color: var(--amber-deep);
+    transform: translateY(-2px);
+  }
   .step-num {
     flex-shrink: 0;
     width: 2.4rem;
@@ -362,8 +428,15 @@ const steps = [
     font-weight: 700;
     font-size: 0.9rem;
   }
-  .step-title { font-size: 1.12rem; margin-bottom: 0.3rem; }
-  .step-text p { color: var(--ink-soft); font-size: 1rem; line-height: 1.65; }
+  .step-title {
+    font-size: 1.12rem;
+    margin-bottom: 0.3rem;
+  }
+  .step-text p {
+    color: var(--ink-soft);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
 
   /* ── Installation ── */
   .install {
@@ -385,7 +458,11 @@ const steps = [
     color: var(--ink-muted);
     margin-bottom: 0.8rem;
   }
-  .reqs-list { list-style: none; display: grid; gap: 0.7rem; }
+  .reqs-list {
+    list-style: none;
+    display: grid;
+    gap: 0.7rem;
+  }
   .reqs-list li {
     position: relative;
     padding-left: 1.3rem;
@@ -394,13 +471,17 @@ const steps = [
     line-height: 1.55;
   }
   .reqs-list li::before {
-    content: '›';
+    content: "›";
     position: absolute;
     left: 0;
     color: var(--amber-dark);
     font-weight: 700;
   }
-  .install-dl { margin-top: 1.3rem; width: 100%; justify-content: center; }
+  .install-dl {
+    margin-top: 1.3rem;
+    width: 100%;
+    justify-content: center;
+  }
 
   /* ── Terminal ── */
   .terminal {
@@ -422,7 +503,9 @@ const steps = [
     border-radius: 50%;
     background: #4a4639;
   }
-  .tb-dot:first-child { background: var(--amber); }
+  .tb-dot:first-child {
+    background: var(--amber);
+  }
   .tb-title {
     margin-left: 0.5rem;
     font-family: var(--font-mono);
@@ -443,8 +526,13 @@ const steps = [
     font-size: 0.86rem;
     line-height: 1.85;
   }
-  .c-comment { color: #6f6a59; }
-  .c-prompt { color: var(--amber-deep); font-weight: 700; }
+  .c-comment {
+    color: #6f6a59;
+  }
+  .c-prompt {
+    color: var(--amber-deep);
+    font-weight: 700;
+  }
 
   .install-foot {
     margin-top: 1.6rem;
@@ -453,7 +541,10 @@ const steps = [
   }
 
   /* ── Closing ── */
-  .closing { text-align: center; padding: 3.2rem 0; }
+  .closing {
+    text-align: center;
+    padding: 3.2rem 0;
+  }
   .closing-stamp {
     font-family: var(--font-mono);
     font-size: 0.7rem;
@@ -462,7 +553,10 @@ const steps = [
     color: var(--ink-muted);
     margin-bottom: 0.7rem;
   }
-  .closing-title { font-size: 2rem; margin-bottom: 1.6rem; }
+  .closing-title {
+    font-size: 2rem;
+    margin-bottom: 1.6rem;
+  }
 
   /* ── Footer ── */
   .home-foot {
@@ -479,10 +573,10 @@ const steps = [
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
-    .hero-figure{
+    .hero-figure {
       display: none;
     }
-    .hero-title-principal{
+    .hero-title-principal {
       text-align: center;
     }
     .hero {
@@ -490,17 +584,27 @@ const steps = [
       gap: 2rem;
       padding: 2.5rem 0 2rem;
     }
-    .file-stamp{
+    .file-stamp {
       transform: rotate(1.2deg);
       margin: auto;
       margin-left: 20%;
     }
     /* Image first on small screens, then the text. */
-    .hero-figure { order: -1; max-width: 460px; }
-    .install { grid-template-columns: 1fr; }
-    .steps { grid-template-columns: 1fr; }
+    .hero-figure {
+      order: -1;
+      max-width: 460px;
+    }
+    .install {
+      grid-template-columns: 1fr;
+    }
+    .steps {
+      grid-template-columns: 1fr;
+    }
   }
   @media (max-width: 520px) {
-    .btn { width: 100%; justify-content: center; }
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
   }
 </style>

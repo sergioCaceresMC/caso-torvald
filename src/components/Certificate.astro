@@ -8,11 +8,11 @@ interface Props {
 }
 
 const {
-  date = 'Mansión Torvald — 13 de octubre de 2024',
-  verdictName = 'Lady Isolde Torvald',
-  verdictLabel = 'Culpable — Homicidio en primer grado',
-  detective = 'Marcos Kernel',
-  code = 'CASO_RESUELTO_TORVALD_2024',
+  date = "Mansión Torvald — 13 de octubre de 2024",
+  verdictName = "Lady Isolde Torvald",
+  verdictLabel = "Culpable — Homicidio en primer grado",
+  detective = "Marcos Kernel",
+  code = "CASO_RESUELTO_TORVALD_2024",
 } = Astro.props;
 ---
 
@@ -58,13 +58,13 @@ const {
     overflow-y: auto;
   }
   .certificate.active {
-    display: block;
+    display: block; 
     animation: fadeIn 0.5s ease-out;
   }
 
   /* Decorative inner rule — like an official document border */
   .certificate::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 10px;
     border: 1px dashed var(--amber-deep);
@@ -73,8 +73,14 @@ const {
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Red "case closed" stamp (no emoji) */
