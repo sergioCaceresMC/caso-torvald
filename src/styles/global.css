@@ -1,0 +1,172 @@
+/* ============================================================
+   El Caso Torvald — Global styles & design tokens
+   Modern "Claude" aesthetic · warm paper, ink & amber (#F8AE2E)
+   Sections styled as detective manuscripts / case files.
+   ============================================================ */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mitha&family=Orbit&display=swap');
+
+/* ── Hadassah Friedlaender (body) ──────────────────────────────
+   Drop the font files into /public/fonts/ to enable the real
+   typeface. Until then the serif fallback stack is used. */
+@font-face {
+  font-family: "Hadassah Friedlaender";
+  src:
+    url("/fonts/hadassah-friedlaender.woff2") format("woff2"),
+    url("/fonts/hadassah-friedlaender.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ── Surfaces (warm paper, à la Claude) ── */
+  --paper: #faf9f5; /* page background  */
+  --paper-2: #f3f1e9; /* sunken sections  */
+  --card: #fffdf7; /* manuscript card  */
+  --card-2: #f7f4ea; /* aged paper tint  */
+
+  /* ── Borders ── */
+  --border: #e7e2d4;
+  --border-strong: #d8d2bf;
+  --border-ink: #cdc6b0;
+
+  /* ── Ink (near-black, warm) ── */
+  --ink: #1a1813; /* primary text     */
+  --ink-soft: #46433a; /* secondary text   */
+  --ink-muted: #847f70; /* captions         */
+  --ink-faint: #b3ad99; /* placeholders     */
+
+  /* ── Amber accent (replaces Claude's clay/orange) ── */
+  --amber: #ff7b00; /* signature accent — chapter NAME background */
+  --amber-deep: #ffaa21; /* hover / borders  */
+  --amber-dark: #a9700a; /* amber text (AA)  */
+  --amber-soft: #fdf0d4; /* pale fills       */
+  --amber-tint: #fef8e9;
+
+  /* ── Yellow (chapter NUMBER background) ── */
+  --yellow: #f6c343;
+  --yellow-deep: #e0a92a;
+
+  /* ── Feedback ── */
+  --success-text: #3f7d3a;
+  --error-text: #b3402f;
+  --ink-stamp: #8a2c22; /* red "evidence" stamp ink */
+
+  /* ── Shape ── */
+  --radius: 16px;
+  --radius-sm: 10px;
+  /* One restrained, soft shadow — used sparingly on hover only. */
+  --lift: 0 10px 24px rgba(26, 24, 19, 0.1);
+  --lift-sm: 0 4px 12px rgba(26, 24, 19, 0.07);
+
+  /* ── Typography ── */
+  --font-mitha: "Orbit", sans-serif;
+  --font-title:
+    "Hadassah Friedlaender", "Iowan Old Style", Palatino, Georgia, serif; /*'Poppins', system-ui, -apple-system, sans-serif;*/
+  --font-body:
+    "Hadassah Friedlaender", "Iowan Old Style", Palatino, Georgia, serif;
+  --font-mono: "JetBrains Mono", "Courier New", Courier, monospace;
+
+  /* Faint paper-grain texture (subtle, no harsh shadows). */
+  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* App shell: fixed-height column so the page itself never scrolls.
+   header (auto) · stage (flex, grows) · chapter nav (auto). */
+body {
+  background-color: var(--paper);
+  background-image: var(--paper-grain);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  line-height: 1.75;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* On narrow screens the cards stack, so allow the page to scroll again. */
+@media (max-width: 760px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+}
+
+/* Regular content pages (e.g. the landing page) opt out of the fixed
+   app-shell so they scroll normally at any width. */
+body.page-scroll {
+  height: auto;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* ── Base typography ── */
+h1,
+h2,
+h3 {
+  font-family: var(--font-title);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--amber-soft);
+  border: 1px solid var(--amber-deep);
+  padding: 1px 6px;
+  border-radius: 5px;
+  color: var(--amber-dark);
+}
+
+strong {
+  font-weight: 700;
+  color: var(--ink);
+  box-shadow: inset 0 -0.42em 0 var(--amber-soft);
+}
+
+em {
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+a {
+  color: var(--amber-dark);
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import ChapterCard from '../components/ChapterCard.astro';
+import Certificate from '../components/Certificate.astro';
+import { chapters } from '../data/chapters';
+---
+
+<BaseLayout>
+  <SiteHeader total={chapters.length} showGameControls />
+
+  <main class="stage">
+    <div class="deck">
+      {chapters.map(ch => <ChapterCard {...ch} />)}
+      <Certificate />
+    </div>
+  </main>
+
+  <nav class="chapter-nav" aria-label="Navegación entre capítulos">
+    <button id="nav-prev" class="nav-btn" type="button">‹ Anterior</button>
+    <div class="nav-center">
+      <span id="nav-label" class="nav-label">Capítulo 1 de {chapters.length}</span>
+      <div id="nav-dots" class="nav-dots"></div>
+    </div>
+    <button id="nav-next" class="nav-btn" type="button">Siguiente ›</button>
+  </nav>
+</BaseLayout>
+
+<script>
+  import '../scripts/escapeRoom';
+</script>
+
+<style>
+  .stage {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    justify-content: center;
+    padding: 1.2rem 1.2rem 0.6rem;
+  }
+
+  .deck {
+    width: 100%;
+    max-width: 1080px;
+    display: flex;
+  }
+
+  /* ── Chapter navigation bar ── */
+  .chapter-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1.4rem 1.1rem;
+    max-width: 1080px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .nav-btn {
+    background: var(--card);
+    border: 1px solid var(--border-strong);
+    color: var(--ink);
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  }
+  .nav-btn:hover:not(:disabled) {
+    border-color: var(--amber-deep);
+    background: var(--amber-soft);
+    transform: translateY(-1px);
+  }
+  .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .nav-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .nav-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  /* Dots stay circular — they're indicators, not boxed UI. */
+  .nav-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 1px solid var(--border-ink);
+    background: var(--card);
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s, border-color 0.2s;
+  }
+  .nav-dot:hover { transform: scale(1.25); }
+  .nav-dot.is-active {
+    background: var(--amber);
+    border-color: var(--amber-deep);
+    transform: scale(1.25);
+  }
+  .nav-dot.is-locked {
+    background: repeating-linear-gradient(
+      45deg, var(--card) 0 2px, var(--border) 2px 4px
+    );
+  }
+  .nav-dot.is-cert {
+    border-radius: 0;
+    background: var(--yellow);
+    border-color: var(--yellow-deep);
+  }
+
+  @media (max-width: 760px) {
+    .stage {
+      overflow: visible;
+      padding: 1rem;
+    }
+    .deck { max-width: 560px; }
+    .chapter-nav { position: sticky; bottom: 0; background: var(--paper); }
+  }
+
+  @media (max-width: 520px) {
+    .nav-btn { font-size: 0.78rem; padding: 0.5rem 0.7rem; }
+  }
+</style>
